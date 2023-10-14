@@ -24,7 +24,7 @@ class PenggunaanBusController extends Controller
             'nama_pemesan' => 'required',
             'tanggal_berangkat' => 'required|date',
             'tanggal_pulang' => 'nullable|date',
-            'biaya_sewa' => 'required|numeric',
+            'biaya_sewa' => 'required|numeric', 
             'uang_masuk' => 'required|numeric|min:0',
             'driver1' => 'required',
             'driver2' => 'required',

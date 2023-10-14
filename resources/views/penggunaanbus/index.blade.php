@@ -81,8 +81,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="uang_masuk">Uang Masuk:</label>
-                                <input type="number" class="form-control" id="uang_masuk" name="uang_masuk"
-                                    value="0">
+                                <input type="number" class="form-control" id="uang_masuk" name="uang_masuk">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

@@ -17,8 +17,8 @@ class KasPerjalananController extends Controller
     {
         $data = $request->validate([
             'driver1_kas' => 'required|numeric',
-            'driver2_kas' => 'required|numeric',
-            'co_driver_kas' => 'required|numeric',
+            'driver2_kas' => 'nullable|numeric',
+            'co_driver_kas' => 'nullable|numeric',
             'solar' => 'required|numeric'
         ]);
 
