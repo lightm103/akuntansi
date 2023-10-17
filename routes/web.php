@@ -31,3 +31,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::resource('pengeluaran', PengeluaranController::class);
 
 Route::resource('penggunaanbus', PenggunaanBusController::class);
+
+Route::resource('pemesanbus', \App\Http\Controllers\PemesanBusController::class);
+Route::get('get-pemesan/{id}', [\App\Http\Controllers\PemesanBusController::class, 'getPemesanById']);
+
+Route::get('document-spj/{id}', [\App\Http\Controllers\SuratPerintahJalanController::class, 'show'])->name('spj.show');
+Route::post('document-spj/store/', [\App\Http\Controllers\SuratPerintahJalanController::class, 'store'])->name('spj.store');

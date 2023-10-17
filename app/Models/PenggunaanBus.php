@@ -10,18 +10,17 @@ class PenggunaanBus extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_pemesan',
-        'tanggal_berangkat',
-        'tanggal_pulang',
-        'biaya_sewa',
-        'uang_masuk',
+        'pemesanbus_id',
         'driver1',
         'driver2',
         'co_driver',
         'no_polisi',
-        'tujuan',
-        'no_telp'
     ];
+
+    public function pemesanBus()
+    {
+        return $this->belongsTo(PemesanBus::class, 'pemesanbus_id', 'id');
+    }
 
     public function suratPerintahJalan()
     {

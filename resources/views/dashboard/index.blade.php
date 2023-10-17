@@ -32,6 +32,15 @@
             <div class="col-md-6 col-sm-12">
                 <div class="card h-100 shadow">
                     <div class="card-body">
+                        <h5 class="card-title">Pemesanan Bus</h5>
+                        <p class="card-text">Klik tombol di bawah ini untuk melihat data penggunaan bus.</p>
+                        <a href="{{ route('pemesanbus.index') }}" class="btn btn-primary btn-block">Lihat Data Pemesan Bus</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
                         <h5 class="card-title">Penggunaan Bus</h5>
                         <p class="card-text">Klik tombol di bawah ini untuk melihat data penggunaan bus.</p>
                         <a href="/penggunaanbus" class="btn btn-primary btn-block">Lihat Data Penggunaan Bus</a>
@@ -39,7 +48,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
