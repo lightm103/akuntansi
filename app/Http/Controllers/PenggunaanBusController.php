@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PemesanBus;
 use App\Models\PenggunaanBus;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,9 @@ class PenggunaanBusController extends Controller
     public function index()
     {
         $dataBuses = PenggunaanBus::all();
-        return view('penggunaanbus.index', compact('dataBuses'));
+        $pemesanBus = PemesanBus::all();
+
+        return view('penggunaanbus.index', compact('dataBuses', 'pemesanBus'));
     }
 
     public function create()
@@ -20,19 +23,15 @@ class PenggunaanBusController extends Controller
 
     public function store(Request $request)
     {
+        $pemesan = PemesanBus::findOrFail($request['pemesanbus_id']);
         $data = $request->validate([
-            'nama_pemesan' => 'required',
-            'tanggal_berangkat' => 'required|date',
-            'tanggal_pulang' => 'nullable|date',
-            'biaya_sewa' => 'required|numeric', 
-            'uang_masuk' => 'required|numeric|min:0',
+            'pemesanbus_id' => 'required',
             'driver1' => 'required',
             'driver2' => 'required',
             'co_driver' => 'required',
             'no_polisi' => 'required',
-            'tujuan' => 'required',
-            'no_telp' => 'required',
         ]);
+        $data['pemesanbus_id'] = $pemesan->id;
 
         PenggunaanBus::create($data);
         return redirect()->route('penggunaanbus.index')->with('success', 'Data Bus Berhasil Disimpan');

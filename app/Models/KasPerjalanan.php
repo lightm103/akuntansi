@@ -8,17 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class KasPerjalanan extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'surat_perintah_jalan_id',
-        'driver1_kas',
-        'driver2_kas',
-        'co_driver_kas',
-        'solar'
+    protected $table = 'kas_perjalanan';
+    protected $guarded = [
+        'id'
     ];
 
     public function suratPerintahJalan()
     {
-        return $this->belongsTo(SuratPerintahJalan::class);
+        return $this->belongsTo(SuratPerintahJalan::class, 'surat_perintah_jalan', 'id');
     }
 }

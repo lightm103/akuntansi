@@ -6,6 +6,18 @@
     <title>Surat Perintah Jalan</title>
     <style>
         /* Anda bisa menambahkan style sesuai kebutuhan disini */
+        .header {
+            text-align: center;
+        }
+
+        .header hr {
+            border-top: 1px solid black;
+        }
+
+        .content {
+            margin-left: 3em;
+            margin-right: 3em;
+        }
     </style>
 </head>
 
@@ -14,25 +26,117 @@
 <div class="header">
     <h2>TARUNA GALUH UTAMA</h2>
     <p>Kontraktor dan Transportasi</p>
+    <hr>
     <h3>Surat Perintah Jalan</h3>
-    <p>Nomor: {{ $spj->id }}</p>
+    <p>Nomor: {{ $spj->suratPerintahJalan->nomor_spj }}</p>
 </div>
 
 <div class="content">
-    <h4>IDENTITAS CREW & KENDARAAN</h4>
-    <p>Driver 1: {{ $spj->driver1 }}</p>
-    <p>Driver 2: {{ $spj->driver2 }}</p>
-    <p>Co Driver: {{ $spj->co_driver }}</p>
-    <p>No. Polisi: {{ $spj->no_polisi }}</p>
-    <p>Tujuan: {{ $spj->tujuan }}</p>
+    <table style="width: 70%">
+        <tr>
+            <td colspan="2"><h4>IDENTITAS CREW & KENDARAAN</h4></td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Driver 1</td>
+            <td>: {{ $spj->driver1 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Driver 2</td>
+            <td>: {{ $spj->driver2 }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Co Driver</td>
+            <td>: {{ $spj->co_driver }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">No. Polisi</td>
+            <td>: {{ $spj->no_polisi }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Tujuan</td>
+            <td>: {{ $spj->pemesanBus->tujuan }}</td>
+        </tr>
+    </table>
 
-    <h4>PEMESAN</h4>
-    <p>Nama Pemesan: {{ $spj->penggunaanBus->nama_pemesan }}</p>
-    <p>No Telp: {{ $spj->no_telp }}</p>
-    <p>Tanggal Berangkat: {{ $spj->penggunaanBus->tanggal_berangkat }}</p>
-    <p>Tanggal Pulang: {{ $spj->penggunaanBus->tanggal_pulang }}</p>
-    <p>Alamat Jemput: {{ $spj->alamat_jemput }}</p>
-    <p>Stand by: {{ $spj->stand_by }}</p>
+    <table style="width: 70%">
+        <tr>
+            <td colspan="2">
+                <h4>PEMESAN</h4>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Nama Pemesan</td>
+            <td>: {{ $spj->pemesanBus->nama_pemesan }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">No Telp</td>
+            <td>: {{ $spj->pemesanBus->no_telp }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Tanggal Berangkat</td>
+            <td>: {{ $spj->pemesanBus->tanggal_berangkat }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Tanggal Pulang</td>
+            <td>: {{ $spj->pemesanBus->tanggal_pulang }}</td>
+        </tr>
+        <tr>
+
+        </tr>
+        <tr>
+            <td style="width: 30%">Stand by</td>
+            <td>: {{ $spj->suratPerintahJalan->stand_by }}</td>
+        </tr>
+    </table>
+    <table style="width: 70%">
+        <tr>
+            <td colspan="2">
+                <h4>KAS PERJALANAN</h4>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Driver 1</td>
+            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->driver1_kas) }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Driver 2</td>
+            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->driver2_kas) }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Co Driver</td>
+            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->codriver_kas) }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Solar</td>
+            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->solar_kas) }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Lain Lain</td>
+            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->lain_lain_kas) }}</td>
+        </tr>
+        <tr>
+            <td style="width: 30%">Total</td>
+            <td style="border-top: 1px solid; font-weight: bold">{{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->total) }}</td>
+        </tr>
+    </table>
+    <table style="width: 100%; margin-top: 4em">
+        <tr>
+            <td style="width: 50%; text-align: center">Penerima SPJ</td>
+            <td style="width: 50%; text-align: center; ">
+                Ciamis, 18 Oktober 2023 <br>
+                Pembuat SPJ
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 100px;"></td>
+        </tr>
+        <tr>
+            <td style="width: 50%; text-align: center;">Sopo</td>
+            <td style="width: 50%; text-align: center;">
+                Jarwo
+            </td>
+        </tr>
+    </table>
 </div>
 
 <!-- Anda bisa menambahkan konten lainnya sesuai kebutuhan -->

@@ -11,67 +11,45 @@
 <body>
 
 <div class="container mt-5">
-    <h3>Detail Bus Pariwisata</h3>
+    <h3>Detail Pemesan</h3>
     <hr>
 
     <div class="row">
         <div class="col-md-4 font-weight-bold">Nama Pemesan:</div>
-        <div class="col-md-8">{{ $bus->pemesanBus->nama_pemesan }}</div>
+        <div class="col-md-8">{{ $pemesanBus->nama_pemesan }}</div>
     </div>
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Tanggal Berangkat:</div>
-        <div class="col-md-8">{{ $bus->pemesanBus->tanggal_berangkat }}</div>
+        <div class="col-md-8">{{ $pemesanBus->tanggal_berangkat }}</div>
     </div>
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Tanggal Pulang:</div>
-        <div class="col-md-8">{{ $bus->pemesanBus->tanggal_pulang }}</div>
+        <div class="col-md-8">{{ $pemesanBus->tanggal_pulang }}</div>
     </div>
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Biaya Sewa:</div>
-        <div class="col-md-8">{{ format_rupiah($bus->pemesanBus->biaya_sewa) }}</div>
+        <div class="col-md-8">{{ format_rupiah($pemesanBus->biaya_sewa) }}</div>
     </div>
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Uang Masuk:</div>
-        <div class="col-md-8">{{ format_rupiah($bus->uang_masuk) }}</div>
+        <div class="col-md-8">{{ format_rupiah($pemesanBus->uang_masuk) }}</div>
     </div>
 
     <div class="row mt-3">
-        <div class="col-md-4 font-weight-bold">Uang Belum Dibayar:</div>
-        <div class="col-md-8">{{ format_rupiah($bus->biaya_sewa - $bus->uang_masuk) }}</div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-4 font-weight-bold">Driver 1:</div>
-        <div class="col-md-8">{{ $bus->driver1 }}</div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-4 font-weight-bold">Driver 2:</div>
-        <div class="col-md-8">{{ $bus->driver2 }}</div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-4 font-weight-bold">Co Driver:</div>
-        <div class="col-md-8">{{ $bus->co_driver }}</div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-4 font-weight-bold">Nomor Polisi Bus:</div>
-        <div class="col-md-8">{{ $bus->no_polisi }}</div>
-    </div>
-    <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Tujuan :</div>
-        <div class="col-md-8">{{ $bus->pemesanBus->tujuan }}</div>
+        <div class="col-md-8">{{ $pemesanBus->tujuan }}</div>
     </div>
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Nomor Telp:</div>
-        <div class="col-md-8">{{ $bus->pemesanBus->no_telp }}</div>
+        <div class="col-md-8">{{ $pemesanBus->no_telp }}</div>
     </div>
     <div class="mt-4">
-        <a href="{{ route('penggunaanbus.index') }}" class="btn btn-primary">Kembali ke Daftar</a>
+        <a href="{{ route('pemesanbus.index') }}" class="btn btn-primary">Kembali ke Daftar</a>
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">Edit</button>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createDocumentModal">Buat Dokumen SPJ</button>
-        <a href="{{ route('spj.show', $bus->id) }}" class="btn btn-info">Lihat Dokumen SPJ</a>
     </div>
 
     <!-- Edit Modal -->
@@ -85,29 +63,33 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('penggunaanbus.update', $bus->id) }}" method="POST">
+                    <form action="{{ route('pemesanbus.update', $pemesanBus->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
                         <div class="form-group">
                             <label for="nama_pemesan">Nama Pemesan:</label>
-                            <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" value="{{ $bus->nama_pemesan }}" required>
+                            <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" value="{{ $pemesanBus->nama_pemesan }}" required>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_berangkat">Tanggal Berangkat:</label>
-                            <input type="date" class="form-control" id="tanggal_berangkat" name="tanggal_berangkat" value="{{ $bus->tanggal_berangkat }}" required>
+                            <input type="date" class="form-control" id="tanggal_berangkat" name="tanggal_berangkat" value="{{ $pemesanBus->tanggal_berangkat }}" required>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_pulang">Tanggal Pulang:</label>
-                            <input type="date" class="form-control" id="tanggal_pulang" name="tanggal_pulang" value="{{ $bus->tanggal_pulang }}">
+                            <input type="date" class="form-control" id="tanggal_pulang" name="tanggal_pulang" value="{{ $pemesanBus->tanggal_pulang }}">
                         </div>
                         <div class="form-group">
                             <label for="biaya_sewa">Biaya Sewa:</label>
-                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" value="{{ $bus->biaya_sewa }}">
+                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" value="{{ $pemesanBus->biaya_sewa }}">
                         </div>
                         <div class="form-group">
-                            <label for="uang_masuk">Uang Masuk:</label>
-                            <input type="number" class="form-control" id="uang_masuk" name="uang_masuk" value="{{ $bus->uang_masuk }}">
+                            <label for="tujuan">Tujuan:</label>
+                            <input type="text" class="form-control" id="tujuan" name="tujuan" value="{{ $pemesanBus->tujuan }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_telp">Nomor Telp:</label>
+                            <input type="number" class="form-control" id="no_telp" name="no_telp" value="{{ $pemesanBus->no_telp }}">
                         </div>
 
                         <div class="modal-footer">
@@ -132,7 +114,7 @@
                 <div class="modal-body">
                     <form action="{{ route('spj.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="bus_id" value="{{ $bus->id }}">
+                        <input type="hidden" name="bus_id" value="{{ $pemesanBus->id }}">
                         <div class="form-group">
                             <label for="alamat_jemput">Alamat Jemput :</label>
                             <input type="text" class="form-control" id="alamat_jemput" name="alamat_jemput" value="" required>
@@ -158,14 +140,9 @@
                                    class="form-control" name="co_driver_kas" id="co_driver_kas" placeholder="">
                         </div>
                         <div class="form-group">
-                            <label for="solar_kas">Solar</label>
+                            <label for="solar">Solar</label>
                             <input type="number"
-                                   class="form-control" name="solar_kas" id="solar_kas" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="lain_lain_kas">Lain Lain</label>
-                            <input type="number"
-                                   class="form-control" name="lain_lain_kas" id="lain_lain_kas" placeholder="">
+                                   class="form-control" name="solar" id="solar" placeholder="">
                         </div>
 
                         <div class="modal-footer">

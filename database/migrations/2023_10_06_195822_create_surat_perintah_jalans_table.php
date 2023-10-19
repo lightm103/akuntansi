@@ -14,17 +14,12 @@ return new class extends Migration
         Schema::create('surat_perintah_jalan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('penggunaan_bus_id')->constrained()->onDelete('cascade');
-            $table->string('driver1');
-            $table->string('driver2');
-            $table->string('co_driver');
-            $table->string('no_polisi');
-            $table->string('tujuan');
-            $table->string('no_telp');
+            $table->string('nomor_spj');
             $table->string('alamat_jemput');
             $table->time('stand_by');
             $table->timestamps();
         });
-        
+
     }
 
     /**
