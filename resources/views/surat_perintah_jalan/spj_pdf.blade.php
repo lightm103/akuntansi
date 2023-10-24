@@ -104,7 +104,7 @@
         </tr>
         <tr>
             <td style="width: 30%">Co Driver</td>
-            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->codriver_kas) }}</td>
+            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->co_driver_kas) }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Solar</td>
@@ -121,9 +121,11 @@
     </table>
     <table style="width: 100%; margin-top: 4em">
         <tr>
-            <td style="width: 50%; text-align: center">Penerima SPJ</td>
+            <td style="width: 50%; text-align: center">
+                <br>
+                Penerima SPJ</td>
             <td style="width: 50%; text-align: center; ">
-                Ciamis, 18 Oktober 2023 <br>
+                Ciamis, {{ \Illuminate\Support\Carbon::now()->isoFormat('D MMMM Y') }} <br>
                 Pembuat SPJ
             </td>
         </tr>
@@ -131,9 +133,11 @@
             <td style="height: 100px;"></td>
         </tr>
         <tr>
-            <td style="width: 50%; text-align: center;">Sopo</td>
             <td style="width: 50%; text-align: center;">
-                Jarwo
+                ...................
+            </td>
+            <td style="width: 50%; text-align: center;">
+                ...................
             </td>
         </tr>
     </table>
