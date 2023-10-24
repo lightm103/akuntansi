@@ -98,7 +98,7 @@ class PemesanBusController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function getPemesanById($id): \Illuminate\Http\JsonResponse
+    public function getPemesanById($id): JsonResponse
     {
         $pemesanById = PemesanBus::findOrFail($id);
         return response()->json($pemesanById);

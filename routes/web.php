@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PemesanBusController;
+use App\Http\Controllers\SuratPerintahJalanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DashboardController;
@@ -31,3 +33,8 @@ Route::resource('pengeluaran', PengeluaranController::class);
 Route::resource('penggunaanbus', PenggunaanBusController::class);
 
 Route::resource('hutang', HutangBarangController::class);
+Route::resource('pemesanbus', PemesanBusController::class);
+Route::get('get-pemesan/{id}', [PemesanBusController::class, 'getPemesanById']);
+
+Route::get('document-spj/{id}', [SuratPerintahJalanController::class, 'show'])->name('spj.show');
+Route::post('document-spj/store/', [SuratPerintahJalanController::class, 'store'])->name('spj.store');

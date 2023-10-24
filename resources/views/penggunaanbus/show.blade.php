@@ -70,8 +70,11 @@
     <div class="mt-4">
         <a href="{{ route('penggunaanbus.index') }}" class="btn btn-primary">Kembali ke Daftar</a>
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">Edit</button>
+        @if(is_null($bus->suratPerintahJalan))
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createDocumentModal">Buat Dokumen SPJ</button>
+        @else
         <a href="{{ route('spj.show', $bus->id) }}" class="btn btn-info">Lihat Dokumen SPJ</a>
+        @endif
     </div>
 
     <!-- Edit Modal -->
@@ -91,19 +94,19 @@
 
                         <div class="form-group">
                             <label for="nama_pemesan">Nama Pemesan:</label>
-                            <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" value="{{ $bus->nama_pemesan }}" required>
+                            <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" value="{{ $bus->pemesanBus->nama_pemesan }}" required>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_berangkat">Tanggal Berangkat:</label>
-                            <input type="date" class="form-control" id="tanggal_berangkat" name="tanggal_berangkat" value="{{ $bus->tanggal_berangkat }}" required>
+                            <input type="date" class="form-control" id="tanggal_berangkat" name="tanggal_berangkat" value="{{ $bus->pemesanBus->tanggal_berangkat }}" required>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_pulang">Tanggal Pulang:</label>
-                            <input type="date" class="form-control" id="tanggal_pulang" name="tanggal_pulang" value="{{ $bus->tanggal_pulang }}">
+                            <input type="date" class="form-control" id="tanggal_pulang" name="tanggal_pulang" value="{{ $bus->pemesanBus->tanggal_pulang }}">
                         </div>
                         <div class="form-group">
                             <label for="biaya_sewa">Biaya Sewa:</label>
-                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" value="{{ $bus->biaya_sewa }}">
+                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" value="{{ $bus->pemesanBus->biaya_sewa }}">
                         </div>
                         <div class="form-group">
                             <label for="uang_masuk">Uang Masuk:</label>
