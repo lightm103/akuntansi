@@ -23,9 +23,9 @@
             <div class="col-md-6 col-sm-12 mb-4">
                 <div class="card h-100 shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Total Pengeluaran</h5>
+                        <h5 class="card-title">Transaksi Pengeluaran & Pemasukan</h5>
                         <p class="card-text display-4">Rp{{ number_format($totalPengeluaran, 0, ',', '.') }}</p>
-                        <a href="/pengeluaran" class="btn btn-primary btn-block">Lihat Detail Pengeluaran</a>
+                        <a href="{{ route('transaksi.index') }}" class="btn btn-primary btn-block">Lihat Detail Transaksi</a>
                     </div>
                 </div>
             </div>

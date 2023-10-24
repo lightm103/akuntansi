@@ -28,6 +28,10 @@ Route::resource('projects', ProjectController::class);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+// Route Transaksi
+Route::get('transaksi', [\App\Http\Controllers\TransaksiController::class, 'index'])->name('transaksi.index');
+Route::post('transaksi/debit', [\App\Http\Controllers\TransaksiController::class, 'pemasukan'])->name('transaksi.debit');
+Route::post('transaksi/kredit', [\App\Http\Controllers\TransaksiController::class, 'pengeluaran'])->name('transaksi.kredit');
 Route::resource('pengeluaran', PengeluaranController::class);
 
 Route::resource('penggunaanbus', PenggunaanBusController::class);

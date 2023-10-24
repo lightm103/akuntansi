@@ -44,10 +44,10 @@
                         <td>
                             <a href="{{ route('pengeluaran.show', $pengeluaran->id) }}"
                                 class="btn btn-sm btn-info">Detail</a>
-                            <a href="#" class="btn btn-sm btn-warning btn-edit" 
-                                data-id="{{ $pengeluaran->id }}" 
-                                data-project-id="{{ $pengeluaran->project->id }}" 
-                                data-jumlah="{{ $pengeluaran->jumlah }}" 
+                            <a href="#" class="btn btn-sm btn-warning btn-edit"
+                                data-id="{{ $pengeluaran->id }}"
+                                data-project-id="{{ $pengeluaran->project->id }}"
+                                data-jumlah="{{ $pengeluaran->jumlah }}"
                                 data-keterangan="{{ $pengeluaran->keterangan }}">
                                 Edit
                             </a>
@@ -64,7 +64,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <!-- Modal Tambah & Edit Pengeluaran -->
     <div class="modal fade" id="pengeluaranModal" tabindex="-1" role="dialog" aria-labelledby="pengeluaranModalLabel"
         aria-hidden="true">
@@ -115,20 +115,20 @@
                 $('#pengeluaranModalLabel').text('Tambah Pengeluaran');
                 $('#pengeluaranModal').modal('show');
             });
-    
+
             // Open modal in EDIT mode
             $('.btn-edit').click(function() {
                 const id = $(this).data('id');
                 const project_id = $(this).data('project-id');
                 const jumlah = $(this).data('jumlah');
                 const keterangan = $(this).data('keterangan');
-    
+
                 $('#pengeluaranForm').attr('action', `/pengeluaran/${id}`);
                 $('#method').val('PUT');
                 $('select[name="project_id"]').val(project_id);
                 $('input[name="jumlah"]').val(jumlah);
                 $('textarea[name="keterangan"]').val(keterangan);
-    
+
                 $('#pengeluaranModalLabel').text('Edit Pengeluaran');
                 $('#pengeluaranModal').modal('show');
             });
