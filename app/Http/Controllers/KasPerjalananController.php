@@ -23,7 +23,7 @@ class KasPerjalananController extends Controller
         ]);
 
         $spj->kasPerjalanan()->create($data);
-        
+
         return redirect()->route('surat_perintah_jalan.show', $spj->id)
                          ->with('success', 'Kas Perjalanan berhasil ditambahkan.');
     }
@@ -44,7 +44,7 @@ class KasPerjalananController extends Controller
         ]);
 
         $spj->kasPerjalanan()->update($data);
-        
+
         return redirect()->route('surat_perintah_jalan.show', $spj->id)
                          ->with('success', 'Kas Perjalanan berhasil diperbarui.');
     }

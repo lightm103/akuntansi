@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\KasPerjalanan;
 use App\Models\SuratPerintahJalan;
+use App\Models\Transaksi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PenggunaanBus;
 use Carbon\Carbon;
@@ -35,7 +36,15 @@ class SuratPerintahJalanController extends Controller
             'total' => $request->driver1_kas + $request->driver2_kas + $request->co_driver_kas + $request->solar_kas + $request->lain_lain_kas,
         ];
 
+        $dataTransaksi = [
+            'tanggal' => Carbon::now(),
+            'jenis_transaksi' => 'bus',
+            'deskripsi' => $bus->pemesanBus->nama_pemesan,
+            'kredit' => $dataKasPerjalanan['total'],
+        ];
+
         KasPerjalanan::create($dataKasPerjalanan);
+        Transaksi::create($dataTransaksi);
 
         return back();
     }
