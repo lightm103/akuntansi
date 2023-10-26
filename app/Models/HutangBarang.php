@@ -16,5 +16,4 @@ class HutangBarang extends Model
         'nama_toko', 
         'status'
     ];
-
 }

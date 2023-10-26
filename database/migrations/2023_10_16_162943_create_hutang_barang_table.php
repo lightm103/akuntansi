@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hutang_barang', function (Blueprint $table) {
+        Schema::create('hutang_barangs', function (Blueprint $table) {
             $table->id();
             $table->string('nama_barang');
-            $table->decimal('total_uang');
+            $table->integer('total_uang');
             $table->string('nama_toko');
             $table->enum('status', ['lunas', 'belum_lunas'])->default('belum_lunas');
             $table->timestamps();

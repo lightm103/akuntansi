@@ -42,3 +42,4 @@ Route::get('get-pemesan/{id}', [PemesanBusController::class, 'getPemesanById']);
 
 Route::get('document-spj/{id}', [SuratPerintahJalanController::class, 'show'])->name('spj.show');
 Route::post('document-spj/store/', [SuratPerintahJalanController::class, 'store'])->name('spj.store');
+Route::patch('hutang/{hutangBarang}', [HutangBarangController::class, 'updateStatus'])->name('hutang.updateStatus');
