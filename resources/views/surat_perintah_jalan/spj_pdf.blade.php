@@ -24,8 +24,8 @@
 <body>
 
 <div class="header">
-    <h2>TARUNA GALUH UTAMA</h2>
-    <p>Kontraktor dan Transportasi</p>
+    <img src="./assets/images/logos/logo-header.png" style="width: 400px; height: auto;" alt="">
+    <h3>Kontraktor dan Transportasi</h3>
     <hr>
     <h3>Surat Perintah Jalan</h3>
     <p>Nomor: {{ $spj->suratPerintahJalan->nomor_spj }}</p>

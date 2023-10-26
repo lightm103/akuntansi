@@ -179,7 +179,6 @@
                         $('#biaya_sewa').val(data.biaya_sewa);
                         $('#tujuan').val(data.tujuan);
                         $('#no_telp').val(data.no_telp);
-
                     }
                 });
             });

@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Bus Pariwisata</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        .flatpickr-input[readonly]{
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
@@ -142,7 +148,7 @@
                         </div>
                         <div class="form-group">
                             <label for="stand_by">Standby :</label>
-                            <input type="text" class="form-control" id="stand_by" name="stand_by" value="" required>
+                            <input type="text" class="form-control" id="standby" name="stand_by" value="" required>
                         </div>
                         <hr>
                         <div class="form-group">
@@ -185,6 +191,17 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    let standby = $("#standby");
+    standby.flatpickr({
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true
+    });
+</script>
 
 </body>
 </html>

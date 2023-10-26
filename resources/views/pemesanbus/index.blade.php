@@ -7,6 +7,13 @@
     <title>Data Pemesan Bus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+        .flatpickr-input[readonly]{
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,7 +25,8 @@
         </div>
     </div>
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">Tambah
-        Data</button>
+        Data
+    </button>
 
     <table class="table table-striped table-hover table-responsive">
         <thead>
@@ -42,7 +50,8 @@
                 <td>
                     <a href="{{ route('pemesanbus.show', $pemesanBus) }}" class="btn btn-sm btn-info">More</a>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $pemesanBus->id }}"
-                            class="btn btn-sm btn-danger">Delete</button>
+                            class="btn btn-sm btn-danger">Delete
+                    </button>
                 </td>
             </tr>
         @endforeach
@@ -93,9 +102,9 @@
                             <label for="alamat_jemput">Alamat Jemput :</label>
                             <input type="text" class="form-control" id="alamat_jemput" name="alamat_jemput">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="standby">Standby :</label>
-                            <input type="text" class="form-control" id="standby" name="standby">
+                            <input type="text" class="form-control" id="standby" name="standby" placeholder="Pilih Jam">
                         </div>
 
                         <div class="modal-footer">
@@ -128,7 +137,8 @@
                             @method('DELETE')
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Batal</button>
+                                        data-bs-dismiss="modal">Batal
+                                </button>
                                 <button type="submit" class="btn btn-danger">Hapus</button>
                             </div>
                         </form>
@@ -145,6 +155,19 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        $(document).ready(function () {
+            let standby = $("#standby");
+            standby.flatpickr({
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "H:i",
+                time_24hr: true
+            });
+        });
     </script>
 </div>
 </body>
