@@ -48,38 +48,20 @@ class HutangBarangController extends Controller
         return view('hutang.edit', compact('hutangBarang'));
     }
 
-    public function updateStatus(Request $request, HutangBarang $hutangBarang)
-    {
-        if ($request->has('status')) {
-            $request->validate([
-                'status' => 'required|in:lunas,belum_lunas'
-            ]);
-
-            $hutangBarang->update(['status' => $request->status]);
-
-            return response()->json(['success' => true, 'message' => 'Status berhasil diupdate!']);
-        }
-
-        return response()->json(['success' => false, 'message' => 'Terjadi kesalahan saat mengupdate status.']);
-    }
     public function destroy(HutangBarang $hutangBarang)
     {
         $hutangBarang->delete();
 
         return redirect()->route('hutang.index')->with('success', 'Hutang barang berhasil dihapus!');
     }
-    public function update(Request $request, HutangBarang $hutangBarang)
-{
-    $request->validate([
-        'nama_barang' => 'required',
-        'total_uang' => 'required|numeric',
-        'nama_toko' => 'required',
-        'status' => 'required|in:lunas,belum_lunas'
-    ]);
+    public function update(Request $request, $id)
+    {
+        $hutangBarang = HutangBarang::where('id', $id)->first();
+        $data = [
+            'status' => $request['status']
+        ];
+        $hutangBarang->update($data);
 
-    $hutangBarang->update($request->all());
-
-    return redirect()->route('hutang.index')->with('success', 'Hutang barang berhasil diperbarui!');
-}
-
+        return redirect()->route('hutang.index')->with('success', 'Hutang barang berhasil diperbarui!');
+    }
 }

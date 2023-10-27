@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\PemesanBusController;
-use App\Http\Controllers\SuratPerintahJalanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HutangUangController;
+use App\Http\Controllers\PemesanBusController;
 use App\Http\Controllers\HutangBarangController;
-use App\Http\Controllers\PengeluaranController; // Jangan lupa untuk meng-import PengeluaranController
 use App\Http\Controllers\PenggunaanBusController;
+use App\Http\Controllers\SuratPerintahJalanController;
+use App\Http\Controllers\PengeluaranController; // Jangan lupa untuk meng-import PengeluaranController
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,8 @@ Route::resource('penggunaanbus', PenggunaanBusController::class);
 Route::resource('hutang', HutangBarangController::class);
 Route::resource('pemesanbus', PemesanBusController::class);
 Route::get('get-pemesan/{id}', [PemesanBusController::class, 'getPemesanById']);
+Route::resource('hutanguang', HutangUangController::class);
+
 
 Route::get('document-spj/{id}', [SuratPerintahJalanController::class, 'show'])->name('spj.show');
 Route::post('document-spj/store/', [SuratPerintahJalanController::class, 'store'])->name('spj.store');
-Route::patch('hutang/{hutangBarang}', [HutangBarangController::class, 'updateStatus'])->name('hutang.updateStatus');
