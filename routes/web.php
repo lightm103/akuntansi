@@ -21,8 +21,8 @@ use App\Http\Controllers\PengeluaranController; // Jangan lupa untuk meng-import
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('welcome');
+Route::get('/', function () {
+    return view('dashboard');
 });
 
 Route::resource('projects', ProjectController::class);
