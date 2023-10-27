@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Transaksi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -28,7 +30,15 @@ class ProjectController extends Controller
             'uang_pinjaman' => 'required|numeric'
         ]);
 
+        $dataTransaksi = [
+            'tanggal' => Carbon::now(),
+            'jenis_transaksi' => 'proyek',
+            'deskripsi' => 'Uang Modal '. $validatedData['name'],
+            'debit' => $validatedData['uang_muka'] + $validatedData['uang_pinjaman']
+        ];
+
         Project::create($validatedData);
+        Transaksi::create($dataTransaksi);
 
         return redirect()->route('projects.index')->with('success', 'Proyek berhasil ditambahkan!');
     }

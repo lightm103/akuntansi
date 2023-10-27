@@ -26,6 +26,8 @@ class TransaksiController extends Controller
             'kredit' => 'required',
         ]);
 
+
+
         Transaksi::create($validated);
 
         return back();
