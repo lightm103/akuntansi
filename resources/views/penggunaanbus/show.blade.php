@@ -47,7 +47,7 @@
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Uang Belum Dibayar:</div>
-        <div class="col-md-8">{{ format_rupiah($bus->biaya_sewa - $bus->uang_masuk) }}</div>
+        <div class="col-md-8">{{ format_rupiah($bus->pemesanBus->biaya_sewa - $bus->uang_masuk) }}</div>
     </div>
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Driver 1:</div>

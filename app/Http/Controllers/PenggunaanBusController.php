@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PemesanBus;
 use App\Models\PenggunaanBus;
+use App\Models\Transaksi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PenggunaanBusController extends Controller
@@ -26,6 +28,7 @@ class PenggunaanBusController extends Controller
         $pemesan = PemesanBus::findOrFail($request['pemesanbus_id']);
         $data = $request->validate([
             'pemesanbus_id' => 'required',
+            'uang_masuk' => 'required',
             'driver1' => 'required',
             'driver2' => 'required',
             'co_driver' => 'required',
@@ -33,7 +36,15 @@ class PenggunaanBusController extends Controller
         ]);
         $data['pemesanbus_id'] = $pemesan->id;
 
+        $dataTransaksi = [
+            'tanggal' => Carbon::now(),
+            'jenis_transaksi' => 'bus',
+            'deskripsi' => 'Uang Masuk dari '. $pemesan->nama_pemesan,
+            'debit' => $data['uang_masuk'],
+        ];
+
         PenggunaanBus::create($data);
+        Transaksi::create($dataTransaksi);
         return redirect()->route('penggunaanbus.index')->with('success', 'Data Bus Berhasil Disimpan');
     }
 
@@ -62,6 +73,7 @@ class PenggunaanBusController extends Controller
         ]);
 
         $bus->update($data);
+
         return redirect()->route('penggunaanbus.show', $bus->id)->with('success', 'Data Bus Berhasil di Perbarui');
     }
 

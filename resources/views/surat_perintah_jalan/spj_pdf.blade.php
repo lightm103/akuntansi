@@ -24,7 +24,7 @@
 <body>
 
 <div class="header">
-    <img src="./assets/images/logos/logo-header.png" style="width: 400px; height: auto;" alt="">
+    <img src="./assets/images/logos/logo-header.png" style="width: 350px; height: auto;" alt="">
     <h3>Kontraktor dan Transportasi</h3>
     <hr>
     <h3>Surat Perintah Jalan</h3>
@@ -134,7 +134,7 @@
         </tr>
         <tr>
             <td style="width: 50%; text-align: center;">
-                ...................
+                {{ $spj->driver1 }}
             </td>
             <td style="width: 50%; text-align: center;">
                 ...................

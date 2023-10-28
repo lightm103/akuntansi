@@ -97,6 +97,12 @@
                             <input type="text" class="form-control" id="no_telp" name="no_telp" readonly>
                         </div>
                         <div class="form-group">
+                            <label for="uang_masuk">Uang Masuk</label>
+                            <input type="number"
+                                   class="form-control" name="uang_masuk" id="uang_masuk" aria-describedby="helpId"
+                                   placeholder="">
+                        </div>
+                        <div class="form-group">
                             <label for="driver1">Driver 1 :</label>
                             <input type="text" class="form-control" id="driver1" name="driver1">
                         </div>

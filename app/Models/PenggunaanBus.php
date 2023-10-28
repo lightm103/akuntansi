@@ -11,6 +11,7 @@ class PenggunaanBus extends Model
 
     protected $fillable = [
         'pemesanbus_id',
+        'uang_masuk',
         'driver1',
         'driver2',
         'co_driver',

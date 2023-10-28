@@ -52,6 +52,6 @@ class SuratPerintahJalanController extends Controller
     {
         $spj = PenggunaanBus::findOrFail($id);
         $pdf = PDF::loadView('surat_perintah_jalan.spj_pdf', compact('spj'));
-        return $pdf->download('surat_perintah_jalan' . $spj->id . '.pdf');
+        return $pdf->stream('surat_perintah_jalan' . $spj->id . '.pdf');
     }
 }
