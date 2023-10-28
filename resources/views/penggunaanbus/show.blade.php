@@ -99,24 +99,25 @@
                         @method('PUT')
 
                         <div class="form-group">
-                            <label for="nama_pemesan">Nama Pemesan:</label>
-                            <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" value="{{ $bus->pemesanBus->nama_pemesan }}" required>
+                            <label for="pemesanbus_id">Nama Pemesan</label>
+                            <input type="text"
+                                   class="form-control" name="pemesanbus_id" id="pemesanbus_id" aria-describedby="helpId" placeholder="" value="{{ $bus->pemesanBus->nama_pemesan }}" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_berangkat">Tanggal Berangkat:</label>
-                            <input type="date" class="form-control" id="tanggal_berangkat" name="tanggal_berangkat" value="{{ $bus->pemesanBus->tanggal_berangkat }}" required>
+                            <label for="driver1">Driver 1 :</label>
+                            <input type="text" class="form-control" id="driver1" name="driver1" value="{{ $bus->driver1 }}">
                         </div>
                         <div class="form-group">
-                            <label for="tanggal_pulang">Tanggal Pulang:</label>
-                            <input type="date" class="form-control" id="tanggal_pulang" name="tanggal_pulang" value="{{ $bus->pemesanBus->tanggal_pulang }}">
+                            <label for="driver2">Driver 2 :</label>
+                            <input type="text" class="form-control" id="driver2" name="driver2" value="{{ $bus->driver2 }}">
                         </div>
                         <div class="form-group">
-                            <label for="biaya_sewa">Biaya Sewa:</label>
-                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" value="{{ $bus->pemesanBus->biaya_sewa }}">
+                            <label for="co_driver">Co Driver :</label>
+                            <input type="text" class="form-control" id="co_driver" name="co_driver" value="{{ $bus->co_driver }}">
                         </div>
                         <div class="form-group">
-                            <label for="uang_masuk">Uang Masuk:</label>
-                            <input type="number" class="form-control" id="uang_masuk" name="uang_masuk" value="{{ $bus->uang_masuk }}">
+                            <label for="no_polisi">Nomor Polisi Bus :</label>
+                            <input type="text" class="form-control" id="no_polisi" name="no_polisi" value="{{ $bus->no_polisi }}">
                         </div>
 
                         <div class="modal-footer">

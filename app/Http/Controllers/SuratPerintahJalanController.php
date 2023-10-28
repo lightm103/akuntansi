@@ -51,6 +51,7 @@ class SuratPerintahJalanController extends Controller
     public function show($id)
     {
         $spj = PenggunaanBus::findOrFail($id);
+//        return view ('surat_perintah_jalan.spj_pdf', compact('spj'));
         $pdf = PDF::loadView('surat_perintah_jalan.spj_pdf', compact('spj'));
         return $pdf->stream('surat_perintah_jalan' . $spj->id . '.pdf');
     }

@@ -59,17 +59,11 @@ class PenggunaanBusController extends Controller
         $bus = PenggunaanBus::findOrFail($id);
 
         $data = $request->validate([
-            'nama_pemesan' => 'required',
-            'tanggal_berangkat' => 'required|date',
-            'tanggal_pulang' => 'nullable|date',
-            'biaya_sewa' => 'required|numeric',
-            'uang_masuk' => 'required|numeric|min:0',
+//            'pemesanbus_id' => 'required',
             'driver1' => 'required',
             'driver2' => 'required',
             'co_driver' => 'required',
             'no_polisi' => 'required',
-            'tujuan' => 'required',
-            'no_telp' => 'required',
         ]);
 
         $bus->update($data);
@@ -80,7 +74,8 @@ class PenggunaanBusController extends Controller
     public function show($id)
     {
         $bus = PenggunaanBus::findOrFail($id);
-        return view('penggunaanbus.show', compact('bus'));
+        $pemesanBus = PemesanBus::all();
+        return view('penggunaanbus.show', compact('bus', 'pemesanBus'));
     }
 
     public function destroy($id)

@@ -18,6 +18,11 @@
             margin-left: 3em;
             margin-right: 3em;
         }
+
+        h4 {
+            margin-bottom : 0px;
+        }
+
     </style>
 </head>
 
@@ -25,10 +30,10 @@
 
 <div class="header">
     <img src="./assets/images/logos/logo-header.png" style="width: 350px; height: auto;" alt="">
-    <h3>Kontraktor dan Transportasi</h3>
+    <h3 style="margin: 0px;">Kontraktor dan Transportasi</h3>
     <hr>
-    <h3>Surat Perintah Jalan</h3>
-    <p>Nomor: {{ $spj->suratPerintahJalan->nomor_spj }}</p>
+    <h3 style="margin-bottom: 0px;">Surat Perintah Jalan</h3>
+    <span>Nomor: {{ $spj->suratPerintahJalan->nomor_spj }}</span>
 </div>
 
 <div class="content">
@@ -125,19 +130,22 @@
                 <br>
                 Penerima SPJ</td>
             <td style="width: 50%; text-align: center; ">
-                Ciamis, {{ \Illuminate\Support\Carbon::now()->isoFormat('D MMMM Y') }} <br>
+                Ciamis, {{ $spj->created_at->isoFormat('D MMMM Y') }} <br>
                 Pembuat SPJ
             </td>
         </tr>
         <tr>
-            <td style="height: 100px;"></td>
+            <td style="width: 50%; height: 50px;"></td>
+            <td style="width: 50%; text-align: center;">
+                <img src="./assets/images/tandatangan.png" alt="" style="margin: 0px;">
+            </td>
         </tr>
         <tr>
             <td style="width: 50%; text-align: center;">
-                {{ $spj->driver1 }}
+                <b>{{ $spj->driver1 }}</b>
             </td>
             <td style="width: 50%; text-align: center;">
-                ...................
+                <b>Aep,SH.,MH.</b>
             </td>
         </tr>
     </table>
