@@ -31,6 +31,8 @@
         <button type="button" class="btn btn-success ml-3" data-toggle="modal" data-target="#pemasukanModal">Tambah
             Pemasukan
         </button>
+        <button type="button" class="btn btn-success ml-3" data-toggle="modal" data-target="#eksportModal">Eksport Data
+        </button>
     </div>
 
     <table class="table table-bordered table-striped" id="table">
@@ -199,6 +201,47 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Eksport Modal --}}
+<div class="modal fade" id="eksportModal" tabindex="-1" role="dialog" aria-labelledby="eksportModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{{ route('transaksi.eksport') }}" method="POST" id="pengeluaranForm">
+                @csrf
+                <input type="hidden" name="_method" id="method" value="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eksportModalLabel">Ekport Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="month">Pilih Bulan</label>
+                        <select class="form-control" name="month" id="month">
+                            @foreach($month as $key => $item)
+                            <option value="{{ $key }}"> {{ \Illuminate\Support\Carbon::parse($item[0]->tanggal)->format('M') }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Pilh Tahun</label>
+                        <select class="form-control" name="year" id="year">
+                            @foreach($years as $key => $item)
+                                <option value="{{ $key  }}"> {{ $key }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Eksport</button>
                 </div>
             </form>
         </div>
