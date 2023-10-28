@@ -60,8 +60,7 @@
             <div class="col-6 mb-3 ">
                 <div class="card h-100 shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Total Uang Proyek</h5>
-                        <p class="card-text display-4">Rp{{ number_format($totalUangProyek, 0, ',', '.') }}</p>
+                        <h5 class="card-title">Proyek</h5>
                         <a href="/projects" class="btn btn-primary btn-block">Lihat Proyek</a>
                     </div>
                 </div>
@@ -70,7 +69,6 @@
                 <div class="card h-100 shadow">
                     <div class="card-body">
                         <h5 class="card-title">Pengeluaran & Pemasukan</h5>
-                        <p class="card-text display-4">Rp{{ number_format($totalPengeluaran, 0, ',', '.') }}</p>
                         <a href="{{ route('transaksi.index') }}" class="btn btn-primary btn-block">Lihat Detail</a>
                     </div>
                 </div>
@@ -103,7 +101,7 @@
                 <div class="card h-100 shadow">
                     <div class="card-body">
                         <h5 class="card-title">Hutang Uang</h5>
-                        <a href="#" class="btn btn-primary btn-block">Lihat Data</a>
+                        <a href="{{ route('hutanguang.index')}}" class="btn btn-primary btn-block">Lihat Data</a>
                     </div>
                 </div>
             </div>
