@@ -8,6 +8,8 @@
     <title>Transaksi</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -57,29 +59,55 @@
                 <td>Rp{{ number_format($transaction->debit, 2, ',', '.') }}</td>
                 <td>Rp{{ number_format($transaction->kredit, 2, ',', '.') }}</td>
                 <td>
-{{--                    <a href="{{ route('pengeluaran.show', $transaction->id) }}"--}}
-{{--                       class="btn btn-sm btn-info">Detail</a>--}}
-{{--                    <a href="#" class="btn btn-sm btn-warning btn-edit"--}}
-{{--                       data-id="{{ $transaction->id }}"--}}
-{{--                       data-project-id="{{ $transaction->project->id }}"--}}
-{{--                       data-jumlah="{{ $transaction->jumlah }}"--}}
-{{--                       data-keterangan="{{ $transaction->keterangan }}">--}}
-{{--                        Edit--}}
-{{--                    </a>--}}
-                    <form action="{{ route('transaksi.destroy', $transaction->id) }}" method="POST"
-                          style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus
-                        </button>
-                    </form>
+                    {{--                    <a href="{{ route('pengeluaran.show', $transaction->id) }}"--}}
+                    {{--                       class="btn btn-sm btn-info">Detail</a>--}}
+                    {{--                    <a href="#" class="btn btn-sm btn-warning btn-edit"--}}
+                    {{--                       data-id="{{ $transaction->id }}"--}}
+                    {{--                       data-project-id="{{ $transaction->project->id }}"--}}
+                    {{--                       data-jumlah="{{ $transaction->jumlah }}"--}}
+                    {{--                       data-keterangan="{{ $transaction->keterangan }}">--}}
+                    {{--                        Edit--}}
+                    {{--                    </a>--}}
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete">
+                        Delete
+                    </button>
+
+                    {{-- Modal Delete --}}
+                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <form action="{{ route('transaksi.destroy', $transaction->id) }}" method="POST"
+                                  style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="pengeluaranModalLabel">Konfirmasi Hapus</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body justify-content-center text-center">
+                                        <h5>Apakah Anda Yakin akan Manghapus Data ? </h5>
+                                        <i class="fa fa-trash fa-7x text-center" style=" color: red; padding: 20px;" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Batalkan
+                                        </button>
+                                        <button type="submit" class="btn btn-danger">Ya</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
 </div>
+
 
 <!-- Modal Tambah & Edit Pengeluaran -->
 <div class="modal fade" id="pengeluaranModal" tabindex="-1" role="dialog" aria-labelledby="pengeluaranModalLabel"
@@ -99,7 +127,8 @@
                     <div class="form-group">
                         <label for="tanggal">Tanggal</label>
                         <input type="date"
-                               class="form-control" name="tanggal" id="tanggal" aria-describedby="helpId" placeholder="" required>
+                               class="form-control" name="tanggal" id="tanggal" aria-describedby="helpId" placeholder=""
+                               required>
                     </div>
                     <div class="form-group">
                         <label>Jenis Pengeluaran</label>
@@ -162,7 +191,8 @@
                     <div class="form-group">
                         <label for="tanggal">Tanggal</label>
                         <input type="date"
-                               class="form-control" name="tanggal" id="tanggal" aria-describedby="helpId" placeholder="" required>
+                               class="form-control" name="tanggal" id="tanggal" aria-describedby="helpId" placeholder=""
+                               required>
                     </div>
                     <div class="form-group">
                         <label>Jenis Pemasukan</label>
@@ -226,7 +256,8 @@
                         <label for="month">Pilih Bulan</label>
                         <select class="form-control" name="month" id="month">
                             @foreach($month as $key => $item)
-                            <option value="{{ $key }}"> {{ \Illuminate\Support\Carbon::parse($item[0]->tanggal)->format('M') }} </option>
+                                <option
+                                    value="{{ $key }}"> {{ \Illuminate\Support\Carbon::parse($item[0]->tanggal)->format('M') }} </option>
                             @endforeach
                         </select>
                     </div>
@@ -252,27 +283,27 @@
     $(document).ready(function () {
         let table = $('#table');
         table.DataTable();
-        $('#jenis-pengeluaran').on('change', function (){
+        $('#jenis-pengeluaran').on('change', function () {
             let jenisPengeluaran = $(this).val();
             let projectInput = $('#project-input');
             let travelInput = $('#travel-input');
             let etcInput = $('#etc-input');
 
-            if ( jenisPengeluaran === 'proyek'){
+            if (jenisPengeluaran === 'proyek') {
                 projectInput.removeClass('d-none');
                 projectInput.find('select').prop('disabled', false);
                 travelInput.addClass('d-none');
                 travelInput.find('select').prop('disabled', true);
                 etcInput.addClass('d-none');
                 etcInput.find('textarea').prop('disabled', true);
-            }else if ( jenisPengeluaran === 'bus') {
+            } else if (jenisPengeluaran === 'bus') {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
                 travelInput.removeClass('d-none');
                 travelInput.find('select').prop('disabled', false);
                 etcInput.addClass('d-none');
                 etcInput.find('textarea').prop('disabled', true);
-            }else {
+            } else {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
                 travelInput.addClass('d-none');
@@ -282,27 +313,27 @@
             }
         });
 
-        $('#jenis-pemasukan').on('change', function (){
+        $('#jenis-pemasukan').on('change', function () {
             let jenisPemasukan = $(this).val();
             let projectInput = $('#project-pemasukan');
             let travelInput = $('#travel-pemasukan');
             let etcInput = $('#etc-pemasukan');
 
-            if ( jenisPemasukan === 'proyek'){
+            if (jenisPemasukan === 'proyek') {
                 projectInput.removeClass('d-none');
                 projectInput.find('select').prop('disabled', false);
                 travelInput.addClass('d-none');
                 travelInput.find('select').prop('disabled', true);
                 etcInput.addClass('d-none');
                 etcInput.find('textarea').prop('disabled', true);
-            }else if ( jenisPemasukan === 'bus') {
+            } else if (jenisPemasukan === 'bus') {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
                 travelInput.removeClass('d-none');
                 travelInput.find('select').prop('disabled', false);
                 etcInput.addClass('d-none');
                 etcInput.find('textarea').prop('disabled', true);
-            }else {
+            } else {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
                 travelInput.addClass('d-none');
@@ -311,7 +342,6 @@
                 etcInput.find('textarea').prop('disabled', false);
             }
         });
-
 
 
         // Open modal in ADD mode
