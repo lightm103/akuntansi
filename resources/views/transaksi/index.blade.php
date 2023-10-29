@@ -87,14 +87,14 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body justify-content-center text-center">
-                                        <h5>Apakah Anda Yakin akan Manghapus Data ? </h5>
-                                        <i class="fa fa-trash fa-7x text-center" style=" color: red; padding: 20px;" aria-hidden="true"></i>
+                                    <div class="modal-body">
+                                        Anda yakin ingin menghapus data ini?
                                     </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Batalkan
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal
                                         </button>
-                                        <button type="submit" class="btn btn-danger">Ya</button>
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
                                     </div>
                                 </div>
                             </form>
