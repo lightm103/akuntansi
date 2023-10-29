@@ -197,7 +197,7 @@
                     <div class="form-group">
                         <label>Jenis Pemasukan</label>
                         <select name="jenis_transaksi" id="jenis-pemasukan" class="form-control" required>
-                            <option value="" selected disabled>Pilih Jenis Pengeluaran</option>
+                            <option value="" selected disabled>Pilih Jenis Pemasukan</option>
                             <option value="proyek">Pengeluaran Proyek</option>
                             <option value="bus">Pengeluaran Travel</option>
                             <option value="lainnya">Pengeluaran Lainnya</option>
