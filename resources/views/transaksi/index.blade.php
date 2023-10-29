@@ -66,14 +66,14 @@
 {{--                       data-keterangan="{{ $transaction->keterangan }}">--}}
 {{--                        Edit--}}
 {{--                    </a>--}}
-{{--                    <form action="{{ route('pengeluaran.destroy', $transaction->id) }}" method="POST"--}}
-{{--                          style="display:inline;">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                        <button type="submit" class="btn btn-sm btn-danger"--}}
-{{--                                onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
+                    <form action="{{ route('transaksi.destroy', $transaction->id) }}" method="POST"
+                          style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus
+                        </button>
+                    </form>
                 </td>
             </tr>
         @endforeach

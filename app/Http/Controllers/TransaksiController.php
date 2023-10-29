@@ -30,6 +30,12 @@ class TransaksiController extends Controller
         return view('transaksi.index', compact('transactions', 'projects', 'travels', 'month', 'years'));
     }
 
+public function destroy(Transaksi $transaksi)
+    {
+        $transaksi->delete();
+        return back();
+    }
+
     public function pengeluaran(Request $request)
     {
         $validated = $request->validate([
