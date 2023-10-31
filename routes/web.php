@@ -35,6 +35,10 @@ Route::resource('pengeluaran', PengeluaranController::class);
 Route::post('transaksi/eksport', [\App\Http\Controllers\TransaksiController::class, 'exportByMonth'])->name('transaksi.eksport');
 Route::delete('transaksi/{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'destroy'])->name('transaksi.destroy');
 
+// Route Kas
+Route::view('kas', 'transaksi.kas.index')->name('kas.index');
+
+
 Route::resource('penggunaanbus', PenggunaanBusController::class);
 
 Route::resource('hutang', HutangBarangController::class);

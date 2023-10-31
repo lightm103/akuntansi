@@ -45,8 +45,6 @@ public function destroy(Transaksi $transaksi)
             'kredit' => 'required',
         ]);
 
-
-
         Transaksi::create($validated);
 
         return back();

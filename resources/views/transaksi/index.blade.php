@@ -26,15 +26,22 @@
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">Kembali ke Dashboard</a>
         </div>
     </div>
-    <div class="d-flex mb-4">
-        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#pengeluaranModal">Tambah
-            Pengeluaran
-        </button>
-        <button type="button" class="btn btn-success ml-3" data-toggle="modal" data-target="#pemasukanModal">Tambah
-            Pemasukan
-        </button>
-        <button type="button" class="btn btn-success ml-3" data-toggle="modal" data-target="#eksportModal">Eksport Data
-        </button>
+    <div class="d-flex justify-content-between mb-4">
+        <div>
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#pengeluaranModal">Tambah
+                Pengeluaran
+            </button>
+            <button type="button" class="btn btn-success ml-3" data-toggle="modal" data-target="#pemasukanModal">Tambah
+                Pemasukan
+            </button>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-success ml-3" data-toggle="modal" data-target="#eksportModal">Eksport Data
+            </button>
+            <a name="lihat-kas" id="lihat-kas" class="btn btn-primary ml-3" href="{{ route('kas.index') }}" role="button">Lihat Kas</a>
+        </div>
+
     </div>
 
     <table class="table table-bordered table-striped" id="table">
