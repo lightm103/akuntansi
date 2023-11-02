@@ -69,12 +69,12 @@
                         </div>
                         <div class="form-group">
                             <label>Uang Muka</label>
-                            <input type="number" class="form-control" name="uang_muka" required>
+                            <input type="number" class="form-control" name="uang_muka" min="0" required>
                         </div>
                         <div class="form-group">
                             <label>Uang Pinjaman</label>
-                            <input type="number" class="form-control" name="uang_pinjaman" required>
-                        </div>                        
+                            <input type="number" class="form-control" name="uang_pinjaman" min="0" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

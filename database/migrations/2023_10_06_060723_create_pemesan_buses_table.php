@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('tanggal_berangkat');
             $table->date('tanggal_pulang')->nullable();
             $table->integer('biaya_sewa');
+            $table->integer('biaya_dp');
             $table->string('tujuan');
             $table->string('alamat_jemput')->nullable();
             $table->string('standby')->nullable();

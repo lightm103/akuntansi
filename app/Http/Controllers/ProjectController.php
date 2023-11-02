@@ -2,43 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\Transaksi;
+use App\Services\Project\ProjectService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    protected ProjectService $projectService;
+    public function __construct(ProjectService $projectService)
+    {
+        $this->projectService = $projectService;
+    }
+
     public function index()
     {
-        $projects = Project::all();
+        $projects = $this->projectService->all();
+
         return view('projects.index', compact('projects'));
     }
 
     public function create()
     {
-        return view('projects.create');  // Asumsi Anda memiliki view 'projects.create'
+        return view('projects.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request): \Illuminate\Http\RedirectResponse
     {
+        // Validate Request
+        $validatedData = $request->validated();
 
-        // Tambahkan validasi sesuai kebutuhan Anda
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'uang_muka' => 'required|numeric',
-            'uang_pinjaman' => 'required|numeric'
-        ]);
-
-        $dataTransaksi = [
-            'tanggal' => Carbon::now(),
-            'jenis_transaksi' => 'proyek',
-            'deskripsi' => 'Uang Modal '. $validatedData['name'],
-            'debit' => $validatedData['uang_muka'] + $validatedData['uang_pinjaman']
-        ];
-
-        Project::create($validatedData);
-        Transaksi::create($dataTransaksi);
+        // Store Project
+        $this->projectService->create($validatedData);
 
         return redirect()->route('projects.index')->with('success', 'Proyek berhasil ditambahkan!');
     }
@@ -53,14 +51,10 @@ class ProjectController extends Controller
         return view('projects.edit', compact('project'));  // Asumsi Anda memiliki view 'projects.edit'
     }
 
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
         // Tambahkan validasi sesuai kebutuhan Anda
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'uang_muka' => 'required|numeric',
-            'uang_pinjaman' => 'required|numeric'
-        ]);
+        $validatedData = $request->validated();
 
         $project->update($validatedData);
 

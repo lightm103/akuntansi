@@ -36,7 +36,7 @@
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Uang Masuk:</div>
-        <div class="col-md-8">{{ format_rupiah($pemesanBus->uang_masuk) }}</div>
+        <div class="col-md-8">{{ format_rupiah($pemesanBus->biaya_dp) }}</div>
     </div>
 
     <div class="row mt-3">
@@ -46,6 +46,14 @@
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Nomor Telp:</div>
         <div class="col-md-8">{{ $pemesanBus->no_telp }}</div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4 font-weight-bold">Alamat Jemput:</div>
+        <div class="col-md-8">{{ $pemesanBus->alamat_jemput }}</div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4 font-weight-bold">Standby:</div>
+        <div class="col-md-8">{{ $pemesanBus->standby }}</div>
     </div>
     <div class="mt-4">
         <a href="{{ route('pemesanbus.index') }}" class="btn btn-primary">Kembali ke Daftar</a>
@@ -69,11 +77,13 @@
 
                         <div class="form-group">
                             <label for="nama_pemesan">Nama Pemesan:</label>
-                            <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan" value="{{ $pemesanBus->nama_pemesan }}" required>
+                            <input type="text" class="form-control" id="nama_pemesan" name="nama_pemesan"
+                                   value="{{ $pemesanBus->nama_pemesan }}" required>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_berangkat">Tanggal Berangkat:</label>
-                            <input type="date" class="form-control" id="tanggal_berangkat" name="tanggal_berangkat" value="{{ $pemesanBus->tanggal_berangkat }}" required>
+                            <input type="date" class="form-control" id="tanggal_berangkat"
+                                   name="tanggal_berangkat" value="{{ $pemesanBus->tanggal_berangkat }}" required>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_pulang">Tanggal Pulang:</label>
@@ -81,15 +91,27 @@
                         </div>
                         <div class="form-group">
                             <label for="biaya_sewa">Biaya Sewa:</label>
-                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" value="{{ $pemesanBus->biaya_sewa }}">
+                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" min="0" value="{{ $pemesanBus->biaya_sewa }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="tujuan">Tujuan:</label>
+                            <label for="biaya_dp">DP :</label>
+                            <input type="number" class="form-control" id="biaya_dp" name="biaya_dp" min="0" value="{{ $pemesanBus->biaya_dp }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tujuan">Tujuan :</label>
                             <input type="text" class="form-control" id="tujuan" name="tujuan" value="{{ $pemesanBus->tujuan }}">
                         </div>
                         <div class="form-group">
-                            <label for="no_telp">Nomor Telp:</label>
-                            <input type="number" class="form-control" id="no_telp" name="no_telp" value="{{ $pemesanBus->no_telp }}">
+                            <label for="no_telp">Nomor Telp :</label>
+                            <input type="text" class="form-control" id="no_telp" name="no_telp" value="{{ $pemesanBus->no_telp }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat_jemput">Alamat Jemput :</label>
+                            <input type="text" class="form-control" id="alamat_jemput" name="alamat_jemput" value="{{ $pemesanBus->alamat_jemput }}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="standby">Standby :</label>
+                            <input type="text" class="form-control" id="standby" name="standby" value="{{ $pemesanBus->standby }}">
                         </div>
 
                         <div class="modal-footer">
