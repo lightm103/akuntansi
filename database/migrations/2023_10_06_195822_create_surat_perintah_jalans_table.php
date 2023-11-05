@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('surat_perintah_jalan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('penggunaan_bus_id')->constrained()->onDelete('cascade');
+            $table->foreignId('penggunaan_bus_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('nomor_spj');
-            $table->string('alamat_jemput');
-            $table->time('stand_by');
+            $table->integer('biaya_driver1');
+            $table->integer('biaya_driver2')->nullable()->default(0);
+            $table->integer('biaya_codriver')->nullable()->default(0);
+            $table->integer('biaya_solar')->nullable()->default(0);
+            $table->integer('biaya_lainnya')->nullable()->default(0);
             $table->timestamps();
         });
-
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -27,6 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('surat_perintah_jalans');
+        Schema::enableForeignKeyConstraints();
     }
 };

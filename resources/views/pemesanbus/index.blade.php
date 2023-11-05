@@ -94,15 +94,15 @@
                         </div>
                         <div class="form-group">
                             <label for="biaya_dp">DP :</label>
-                            <input type="number" class="form-control" id="biaya_dp" name="biaya_dp" min="0" required>
+                            <input type="number" class="form-control" id="biaya_dp" name="biaya_dp" min="0">
                         </div>
                         <div class="form-group">
                             <label for="tujuan">Tujuan :</label>
-                            <input type="text" class="form-control" id="tujuan" name="tujuan">
+                            <input type="text" class="form-control" id="tujuan" name="tujuan" required>
                         </div>
                         <div class="form-group">
                             <label for="no_telp">Nomor Telp :</label>
-                            <input type="text" class="form-control" id="no_telp" name="no_telp">
+                            <input type="text" class="form-control" id="no_telp" name="no_telp" required>
                         </div>
                         <div class="form-group">
                             <label for="alamat_jemput">Alamat Jemput :</label>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="standby">Standby :</label>
-                            <input type="text" class="form-control" id="standby" name="standby">
+                            <input type="text" class="form-control" id="standby" name="standby" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

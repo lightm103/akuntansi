@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreSuratPerintahJalanRequest;
+use App\Http\Requests\UpdateSuratPerintahJalanRequest;
 use App\Models\KasPerjalanan;
 use App\Models\SuratPerintahJalan;
 use App\Models\Transaksi;
+use App\Services\SuratPerintahJalan\SuratPerintahJalanService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PenggunaanBus;
 use Carbon\Carbon;
@@ -12,46 +15,43 @@ use Illuminate\Http\Request;
 
 class SuratPerintahJalanController extends Controller
 {
-    public function store(Request $request)
+    protected $suratPerintahJalanService;
+
+    public function __construct(SuratPerintahJalanService $suratPerintahJalanService)
     {
-        $bus = PenggunaanBus::findOrFail($request->bus_id);
-        $nomorSPJ = $bus->id.'/'.'TGU'.'/'. numberToRoman(Carbon::now()->month) . '/'. Carbon::now()->year ;
+        $this->suratPerintahJalanService = $suratPerintahJalanService;
+    }
 
-        $dataSPJ = [
-            'penggunaan_bus_id' => $request->bus_id,
-            'nomor_spj' => $nomorSPJ,
-            'alamat_jemput' => $request->alamat_jemput,
-            'stand_by' => $request->stand_by,
-        ];
+    public function store(StoreSuratPerintahJalanRequest $request)
+    {
+        $nomorSPJ = $request['bus_id'] .'/'.'TGU'.'/'. numberToRoman(Carbon::now()->month) . '/'. Carbon::now()->year ;
+        $data = $request->validated();
 
-        $suratPerintahJalan = SuratPerintahJalan::create($dataSPJ);
+        // Set Data
+        $data['penggunaan_bus_id'] = $request['bus_id'];
+        $data['nomor_spj'] = $nomorSPJ;
 
-        $dataKasPerjalanan = [
-            'surat_perintah_jalan_id' => $suratPerintahJalan->id,
-            'driver1_kas' => $request->driver1_kas,
-            'driver2_kas' => $request->driver2_kas,
-            'co_driver_kas' => $request->co_driver_kas,
-            'solar_kas' => $request->solar_kas,
-            'lain_lain_kas' => $request->lain_lain_kas,
-            'total' => $request->driver1_kas + $request->driver2_kas + $request->co_driver_kas + $request->solar_kas + $request->lain_lain_kas,
-        ];
+        $this->suratPerintahJalanService->create($data);
 
-        $dataTransaksi = [
-            'tanggal' => Carbon::now(),
-            'jenis_transaksi' => 'bus',
-            'deskripsi' => $bus->pemesanBus->nama_pemesan,
-            'kredit' => $dataKasPerjalanan['total'],
-        ];
-
-        KasPerjalanan::create($dataKasPerjalanan);
-        Transaksi::create($dataTransaksi);
-
-        return back();
+        return back()->with('Success', 'Surat Perintah Jalan Berhasil di Buat!');
     }
     public function show($id)
     {
-        $spj = PenggunaanBus::findOrFail($id);
+        $spj = $this->suratPerintahJalanService->findOrFail($id);
+
+        // Set Data
+        $spj['total'] = $spj['biaya_driver1'] + $spj['biaya_driver2'] + $spj['biaya_codriver']  + $spj['biaya_solar'] + $spj['biaya_lainnya'] ;
+
         $pdf = PDF::loadView('surat_perintah_jalan.spj_pdf', compact('spj'));
         return $pdf->download('surat_perintah_jalan' . $spj->id . '.pdf');
+    }
+
+    public function update($id, UpdateSuratPerintahJalanRequest $request)
+    {
+        $data = $request->validated();
+
+        $this->suratPerintahJalanService->update($id, $data);
+
+        return redirect()->back()->with('Success', 'Surat Perintah Jalan Berhasil di Update');
     }
 }

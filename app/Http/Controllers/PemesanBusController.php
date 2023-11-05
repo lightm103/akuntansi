@@ -43,16 +43,10 @@ class PemesanBusController extends Controller
      */
     public function store(StorePemesanBusRequest $request)
     {
-        try {
             $data = $request->validated();
             $this->pemesanBusService->create($data);
-            toastr()->success('Pemesanan Bus berhasil ditambahkan!', 'Success');
-            return back();
-        } catch (Exception $e) {
-            Log::error('Pengecualian terjadi: ' . $e->getMessage());
-            toastr()->error('Terjadi kesalahan saat menambahkan pemesanan Bus. Silakan coba lagi.', 'Error');
-            return back();
-        }
+
+            return back()->with('Success', 'Pemesan Bus berhasil ditambahkan!');
     }
 
     /**
@@ -80,8 +74,8 @@ class PemesanBusController extends Controller
     {
         $data = $request->validated();
         $this->pemesanBusService->update($id, $data);
-        toastr()->success('Pemesanan Bus berhasil diupdate!', 'Success');
-        return back();
+
+        return back()->with('Success', 'Pemesan Bus berhasil diupdate!');
     }
 
     /**
@@ -92,11 +86,9 @@ class PemesanBusController extends Controller
         try {
             $this->pemesanBusService->delete($id);
 
-            toastr()->success('Pemesan Bus Berhasil di Hapus!', 'Dihapus');
-            return back();
+            return back()->with('Success', 'Pemesan Bus Berhasil di Hapus!');
         } catch (Exception $e) {
-            toastr()->error('Pemesan Bus Gagal di Hapus!', 'Dihapus');
-            return back();
+            return back()->with('Error', 'Pemesan Bus Gagal di Hapus!');
         }
     }
 
@@ -106,7 +98,7 @@ class PemesanBusController extends Controller
      */
     public function getPemesanById($id): JsonResponse
     {
-        $pemesanById = PemesanBus::findOrFail($id);
+        $pemesanById = $this->pemesanBusService->findOrFail($id);
         return response()->json($pemesanById);
     }
 }

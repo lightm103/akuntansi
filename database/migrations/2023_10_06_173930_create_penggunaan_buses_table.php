@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('penggunaan_buses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemesanbus_id')->constrained('pemesan_buses', 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('uang_masuk');
+            $table->foreignId('pemesan_id')->constrained('pemesan_buses', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('armada_id')->constrained('armada_buses', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('driver1');
-            $table->string('driver2');
-            $table->string('co_driver');
-            $table->string('no_polisi');
+            $table->string('driver2')->nullable();
+            $table->string('co_driver')->nullable();
             $table->timestamps();
         });
     }

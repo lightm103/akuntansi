@@ -10,21 +10,25 @@ class PenggunaanBus extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pemesanbus_id',
-        'uang_masuk',
+        'pemesan_id',
+        'armada_id',
         'driver1',
         'driver2',
         'co_driver',
-        'no_polisi',
     ];
 
     public function pemesanBus()
     {
-        return $this->belongsTo(PemesanBus::class, 'pemesanbus_id', 'id');
+        return $this->belongsTo(PemesanBus::class, 'pemesan_id', 'id');
     }
 
     public function suratPerintahJalan()
     {
         return $this->hasOne(SuratPerintahJalan::class);
+    }
+
+    public function armadaBus()
+    {
+        return $this->belongsTo(ArmadaBus::class, 'armada_id', 'id');
     }
 }

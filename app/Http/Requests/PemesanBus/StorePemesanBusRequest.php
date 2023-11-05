@@ -23,14 +23,14 @@ class StorePemesanBusRequest extends FormRequest
     {
         return [
             'nama_pemesan' => 'required',
-            'no_telp' => 'required',
             'tanggal_berangkat' => 'required|date',
             'tanggal_pulang' => 'nullable|date',
             'biaya_sewa' => 'required|numeric',
             'biaya_dp' => 'numeric',
             'tujuan' => 'required',
+            'no_telp' => 'required',
             'alamat_jemput' => 'string',
-            'standby' => 'nullable',
+            'standby' => '',
         ];
     }
 

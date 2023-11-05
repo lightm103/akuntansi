@@ -33,7 +33,7 @@
     <h3 style="margin: 0px;">Kontraktor dan Transportasi</h3>
     <hr>
     <h3 style="margin-bottom: 0px;">Surat Perintah Jalan</h3>
-    <span>Nomor: {{ $spj->suratPerintahJalan->nomor_spj }}</span>
+    <span>Nomor: {{ $spj->nomor_spj }}</span>
 </div>
 
 <div class="content">
@@ -43,23 +43,23 @@
         </tr>
         <tr>
             <td style="width: 30%">Driver 1</td>
-            <td>: {{ $spj->driver1 }}</td>
+            <td>: {{ $spj->penggunaanBus->driver1 }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Driver 2</td>
-            <td>: {{ $spj->driver2 }}</td>
+            <td>: {{ $spj->penggunaanBus->driver2 }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Co Driver</td>
-            <td>: {{ $spj->co_driver }}</td>
+            <td>: {{ $spj->penggunaanBus->co_driver }}</td>
         </tr>
         <tr>
             <td style="width: 30%">No. Polisi</td>
-            <td>: {{ $spj->no_polisi }}</td>
+            <td>: {{ $spj->penggunaanBus->armadaBus->nomor_plat }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Tujuan</td>
-            <td>: {{ $spj->pemesanBus->tujuan }}</td>
+            <td>: {{ $spj->penggunaanBus->pemesanBus->tujuan }}</td>
         </tr>
     </table>
 
@@ -71,26 +71,26 @@
         </tr>
         <tr>
             <td style="width: 30%">Nama Pemesan</td>
-            <td>: {{ $spj->pemesanBus->nama_pemesan }}</td>
+            <td>: {{ $spj->penggunaanBus->pemesanBus->nama_pemesan }}</td>
         </tr>
         <tr>
             <td style="width: 30%">No Telp</td>
-            <td>: {{ $spj->pemesanBus->no_telp }}</td>
+            <td>: {{ $spj->penggunaanBus->pemesanBus->no_telp }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Tanggal Berangkat</td>
-            <td>: {{ $spj->pemesanBus->tanggal_berangkat }}</td>
+            <td>: {{ $spj->penggunaanBus->pemesanBus->tanggal_berangkat }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Tanggal Pulang</td>
-            <td>: {{ $spj->pemesanBus->tanggal_pulang }}</td>
+            <td>: {{ $spj->penggunaanBus->pemesanBus->tanggal_pulang }}</td>
         </tr>
         <tr>
 
         </tr>
         <tr>
             <td style="width: 30%">Stand by</td>
-            <td>: {{ $spj->suratPerintahJalan->stand_by }}</td>
+            <td>: {{ $spj->penggunaanBus->pemesanBus->standby }}</td>
         </tr>
     </table>
     <table style="width: 70%">
@@ -101,27 +101,27 @@
         </tr>
         <tr>
             <td style="width: 30%">Driver 1</td>
-            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->driver1_kas) }}</td>
+            <td>: {{ format_rupiah($spj->biaya_driver1) }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Driver 2</td>
-            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->driver2_kas) }}</td>
+            <td>: {{ format_rupiah($spj->biaya_driver2) }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Co Driver</td>
-            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->co_driver_kas) }}</td>
+            <td>: {{ format_rupiah($spj->biaya_codriver) }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Solar</td>
-            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->solar_kas) }}</td>
+            <td>: {{ format_rupiah($spj->biaya_solar) }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Lain Lain</td>
-            <td>: {{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->lain_lain_kas) }}</td>
+            <td>: {{ format_rupiah($spj->biaya_lainny) }}</td>
         </tr>
         <tr>
             <td style="width: 30%">Total</td>
-            <td style="border-top: 1px solid; font-weight: bold">{{ format_rupiah($spj->suratPerintahJalan->kasPerjalanan->total) }}</td>
+            <td style="border-top: 1px solid; font-weight: bold">{{ format_rupiah($spj->total) }}</td>
         </tr>
     </table>
     <table style="width: 100%; margin-top: 4em">
@@ -142,7 +142,7 @@
         </tr>
         <tr>
             <td style="width: 50%; text-align: center;">
-                <b>{{ $spj->driver1 }}</b>
+                <b>{{ $spj->penggunaanBus->driver1 }}</b>
             </td>
             <td style="width: 50%; text-align: center;">
                 <b>Aep,SH.,MH.</b>

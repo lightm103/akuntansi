@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ArmadaBus;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,10 +14,29 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
+        $armadas = [
+            [
+                'name' => 'Bus 1',
+                'jenis_bus' => 'Mini Bus',
+                'nomor_plat' => 'Z 9384 KI',
+                'status_ketersediaan' => true,
+            ],
+            [
+                'name' => 'Bus 2',
+                'jenis_bus' => 'Mini Bus',
+                'nomor_plat' => 'Z 93802 JK',
+                'status_ketersediaan' => false,
+            ],
+            [
+                'name' => 'Bus 3',
+                'jenis_bus' => 'Jet Bus',
+                'nomor_plat' => 'Z 1231 TI',
+                'status_ketersediaan' => true,
+            ]
+        ];
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        foreach ($armadas as $armada) {
+            ArmadaBus::create($armada);
+        }
     }
 }
