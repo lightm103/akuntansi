@@ -6,22 +6,31 @@ use App\Exports\TransaksiExport;
 use App\Models\PemesanBus;
 use App\Models\Project;
 use App\Models\Transaksi;
+use App\Services\PemesanBus\PemesanBusService;
+use App\Services\Transaksi\TransaksiService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
+    protected $transaksiService;
+    protected $pemesanBusService;
+
+    public function __construct(TransaksiService $transaksiService, PemesanBusService $pemesanBusService) {
+        $this->transaksiService = $transaksiService;
+        $this->pemesanBusService = $pemesanBusService;
+    }
     public function index()
     {
-        $transactions = Transaksi::all();
+        $transactions = $this->transaksiService->all();
         $projects = Project::all();
-        $travels = PemesanBus::all();
-        $month = Transaksi::select('tanggal')
+        $travels = $this->pemesanBusService->all();
+        $month = Transaksi::select('tanggal_transaksi')
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->tanggal)->format('m');
             });
-        $years = Transaksi::select('tanggal')
+        $years = Transaksi::select('tanggal_transaksi')
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->tanggal)->format('Y');

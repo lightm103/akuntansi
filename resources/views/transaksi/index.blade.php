@@ -60,11 +60,11 @@
         @foreach ($transactions as $transaction)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $transaction->tanggal }}</td>
-                <td>{{ $transaction->jenis_transaksi }}</td>
-                <td>{{ $transaction->deskripsi }}</td>
-                <td>Rp{{ number_format($transaction->debit, 2, ',', '.') }}</td>
-                <td>Rp{{ number_format($transaction->kredit, 2, ',', '.') }}</td>
+                <td>{{ $transaction->tanggal_transaksi }}</td>
+                <td>{{ $transaction->jenisTransaksi->nama_jenis_transaksi }}</td>
+                <td>{{ $transaction->deskripsi_transaksi }}</td>
+                <td>Rp{{ number_format($transaction->jenisTransaksi->id == 1 ? $transaction->jumlah : 0 , 2, ',', '.') }}</td>
+                <td>Rp{{ number_format($transaction->jenisTransaksi->id == 2 ? $transaction->jumlah : 0 , 2, ',', '.') }}</td>
                 <td>
                     {{--                    <a href="{{ route('pengeluaran.show', $transaction->id) }}"--}}
                     {{--                       class="btn btn-sm btn-info">Detail</a>--}}

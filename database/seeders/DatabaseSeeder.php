@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\ArmadaBus;
+use App\Models\JenisTransaksi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -37,6 +38,22 @@ class DatabaseSeeder extends Seeder
 
         foreach ($armadas as $armada) {
             ArmadaBus::create($armada);
+        }
+
+        $jenisTransaksi = [
+            [
+                'nama_jenis_transaksi' => 'debit',
+                'kode_jenis_transaksi' => 'JT-01',
+            ],
+            [
+                'nama_jenis_transaksi' => 'kredit',
+                'kode_jenis_transaksi' => 'JT-02',
+            ]
+        ];
+
+        foreach ( $jenisTransaksi as $item )
+        {
+            JenisTransaksi::create($item);
         }
     }
 }

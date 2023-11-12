@@ -94,7 +94,7 @@
                         </div>
                         <div class="form-group">
                             <label for="biaya_dp">DP :</label>
-                            <input type="number" class="form-control" id="biaya_dp" name="biaya_dp" min="0">
+                            <input type="number" class="form-control" id="biaya_dp" name="biaya_dp" value="0" min="0">
                         </div>
                         <div class="form-group">
                             <label for="tujuan">Tujuan :</label>

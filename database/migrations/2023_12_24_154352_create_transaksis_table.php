@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->enum('jenis_transaksi',['proyek', 'bus', 'lainnya']);
-            $table->string('deskripsi');
-            $table->integer('debit')->nullable();
-            $table->integer('kredit')->nullable();
+            $table->date('tanggal_transaksi');
+            $table->string('deskripsi_transaksi');
+            $table->integer('jumlah');
+            $table->foreignId('jenis_transaksi_id')->constrained('jenis_transaksis', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('transaksi_travel_id')->nullable()->constrained('transaksi_travel', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
