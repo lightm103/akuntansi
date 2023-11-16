@@ -35,7 +35,7 @@ class TransaksiExport implements FromCollection, WithHeadings
                 'jenis_transaksi' => $item->jenisTransaksi->nama_jenis_transaksi,
                 'deskripsi' => $item->deskripsi_transaksi,
                 'debit' => number_format($item->jenisTransaksi->kode_jenis_transaksi == 'debit' ? $item->jumlah : 0 , 2, ',', '.'),
-                'kredit' => number_format($item->jenisTransaksi->kode_jenis_transaksi == 'debit' ? $item->jumlah : 0 , 2, ',', '.'),
+                'kredit' => number_format($item->jenisTransaksi->kode_jenis_transaksi == 'kredit' ? $item->jumlah : 0 , 2, ',', '.'),
             ];
 
             return $data;
