@@ -23,19 +23,19 @@ class TransaksiExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        $query = Transaksi::select('tanggal', 'jenis_transaksi', 'deskripsi', 'debit', 'kredit')
-            ->whereYear('tanggal', $this->year)
-            ->whereMonth('tanggal', $this->month)
+        $query = Transaksi::select('tanggal_transaksi', 'jenis_transaksi_id', 'deskripsi_transaksi', 'jumlah')
+            ->whereYear('tanggal_transaksi', $this->year)
+            ->whereMonth('tanggal_transaksi', $this->month)
             ->get();
 
         $transactions = $query->map(function ($item, $key) {
             $data = [
                 'no' => $key + 1,
-                'tanggal' => $item->tanggal,
-                'jenis_transaksi' => $item->jenis_transaksi,
-                'deskripsi' => $item->deskripsi,
-                'debit' => $item->debit,
-                'kredit' => $item->kredit,
+                'tanggal' => $item->tanggal_transaksi,
+                'jenis_transaksi' => $item->jenisTransaksi->nama_jenis_transaksi,
+                'deskripsi' => $item->deskripsi_transaksi,
+                'debit' => number_format($item->jenisTransaksi->kode_jenis_transaksi == 'debit' ? $item->jumlah : 0 , 2, ',', '.'),
+                'kredit' => number_format($item->jenisTransaksi->kode_jenis_transaksi == 'debit' ? $item->jumlah : 0 , 2, ',', '.'),
             ];
 
             return $data;
