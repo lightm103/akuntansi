@@ -22,7 +22,7 @@ class ProjectObserver
             'projects_id' => $project->id,
             'tanggal_transaksi' => $project->created_at,
             'deskripsi_transaksi' => 'Uang Modal Proyek ' . $project->name,
-            'jenis_transaksi_id' => '1',
+            'jenis_transaksi_id' => '3',
             'jumlah' => $project->getTotalAttribute(),
         ];
 

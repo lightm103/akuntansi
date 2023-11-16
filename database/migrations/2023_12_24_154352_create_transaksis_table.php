@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->foreignId('jenis_transaksi_id')->constrained('jenis_transaksis', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('transaksi_travel_id')->nullable()->constrained('transaksi_travel', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('transaksi_project_id')->nullable()->constrained('transaksi_project', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -50,6 +50,22 @@ class DatabaseSeeder extends Seeder
                 'kode_jenis_transaksi' => 'kredit',
             ],
             [
+                'nama_jenis_transaksi' => 'Pemasukan Proyek',
+                'kode_jenis_transaksi' => 'debit',
+            ],
+            [
+                'nama_jenis_transaksi' => 'Pengeluaran Proyek',
+                'kode_jenis_transaksi' => 'kredit',
+            ],
+            [
+                'nama_jenis_transaksi' => 'Pemasukan Lainnya',
+                'kode_jenis_transaksi' => 'debit',
+            ],
+            [
+                'nama_jenis_transaksi' => 'Pengeluaran Lainnya',
+                'kode_jenis_transaksi' => 'kredit',
+            ],
+            [
                 'nama_jenis_transaksi' => 'Uang DP',
                 'kode_jenis_transaksi' => 'debit',
             ]
