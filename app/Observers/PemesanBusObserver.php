@@ -34,7 +34,7 @@ class PemesanBusObserver
      */
     public function updated(PemesanBus $pemesanBus): void
     {
-        //
+        dd($pemesanBus->transaksiTravel);
     }
 
     /**

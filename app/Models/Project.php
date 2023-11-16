@@ -12,4 +12,9 @@ class Project extends Model
     public function getTotalAttribute(){
         return $this->uang_muka + $this->uang_pinjaman;
     }
+
+    public function transaksiProject()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

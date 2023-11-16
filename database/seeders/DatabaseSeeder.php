@@ -42,12 +42,16 @@ class DatabaseSeeder extends Seeder
 
         $jenisTransaksi = [
             [
-                'nama_jenis_transaksi' => 'debit',
-                'kode_jenis_transaksi' => 'JT-01',
+                'nama_jenis_transaksi' => 'Pemasukan Travel',
+                'kode_jenis_transaksi' => 'debit',
             ],
             [
-                'nama_jenis_transaksi' => 'kredit',
-                'kode_jenis_transaksi' => 'JT-02',
+                'nama_jenis_transaksi' => 'Pengeluaran Travel',
+                'kode_jenis_transaksi' => 'kredit',
+            ],
+            [
+                'nama_jenis_transaksi' => 'Uang DP',
+                'kode_jenis_transaksi' => 'debit',
             ]
         ];
 
