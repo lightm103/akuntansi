@@ -38,7 +38,12 @@
         </tr>
         </thead>
         <tbody>
-
+            @foreach($data as $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

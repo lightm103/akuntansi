@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('uang_muka',15,2)->default(0);
-            $table->decimal('uang_pinjaman', 15, 2)->default(0);
+            $table->integer('uang_muka');
+            $table->integer('uang_pinjaman');
             $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });

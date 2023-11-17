@@ -15,4 +15,9 @@ class PemesanBus extends Model
     {
         return $this->hasOne(PenggunaanBus::class);
     }
+
+    public function transaksiTravel()
+    {
+        return $this->hasMany(TransaksiTravel::class);
+    }
 }

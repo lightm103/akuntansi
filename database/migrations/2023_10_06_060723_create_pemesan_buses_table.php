@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('pemesan_buses', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pemesan');
-            $table->string('no_telp');
             $table->date('tanggal_berangkat');
             $table->date('tanggal_pulang')->nullable();
             $table->integer('biaya_sewa');
+            $table->integer('biaya_dp')->nullable();
             $table->string('tujuan');
+            $table->string('no_telp');
             $table->string('alamat_jemput')->nullable();
             $table->string('standby')->nullable();
             $table->timestamps();

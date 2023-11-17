@@ -38,7 +38,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $bus->pemesanBus->nama_pemesan }}</td>
-                <td>{{ $bus->no_polisi }}</td>
+                <td>{{ $bus->armadaBus->nomor_plat }}</td>
                 <td>{{ $bus->pemesanBus->tanggal_berangkat }}</td>
                 <td>{{ $bus->pemesanBus->tanggal_pulang }}</td>
                 <td>{{ $bus->pemesanBus->tujuan }}</td>
@@ -67,44 +67,44 @@
                     <form action="{{ route('penggunaanbus.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="pemesanbus_id">Nama Pemesan</label>
-                            <select class="form-select" name="pemesanbus_id" id="pemesanbus_id">
+                            <label for="pemesan_id">Nama Pemesan</label>
+                            <select class="form-select" name="pemesan_id" id="pemesan_id">
                                 <option value="" disabled selected>Pilih Pemesan</option>
                                 @foreach($pemesanBus as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_pemesan }}</option>
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="tanggal_berangkat">Tanggal Berangkat:</label>
                             <input type="date" class="form-control" id="tanggal_berangkat"
-                                   name="tanggal_berangkat" readonly>
+                                   name="tanggal_berangkat" disabled>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_pulang">Tanggal Pulang:</label>
-                            <input type="date" class="form-control" id="tanggal_pulang" name="tanggal_pulang" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="biaya_sewa">Biaya Sewa:</label>
-                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" readonly>
+                            <input type="date" class="form-control" id="tanggal_pulang" name="tanggal_pulang" disabled>
                         </div>
                         <div class="form-group">
                             <label for="tujuan">Tujuan :</label>
-                            <input type="text" class="form-control" id="tujuan" name="tujuan" readonly>
+                            <input type="text" class="form-control" id="tujuan" name="tujuan" disabled>
                         </div>
                         <div class="form-group">
                             <label for="no_telp">Nomor Telp :</label>
-                            <input type="text" class="form-control" id="no_telp" name="no_telp" readonly>
+                            <input type="text" class="form-control" id="no_telp" name="no_telp" disabled>
                         </div>
+                        <hr>
                         <div class="form-group">
-                            <label for="uang_masuk">Uang Masuk</label>
-                            <input type="number"
-                                   class="form-control" name="uang_masuk" id="uang_masuk" aria-describedby="helpId"
-                                   placeholder="">
+                            <label for="armada_id">Pilih Armada</label>
+                            <select class="form-select" name="armada_id" id="armada_id">
+                                @foreach($armadaBus as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="driver1">Driver 1 :</label>
-                            <input type="text" class="form-control" id="driver1" name="driver1">
+                            <input type="text" class="form-control" id="driver1" name="driver1" required>
                         </div>
                         <div class="form-group">
                             <label for="driver2">Driver 2 :</label>
@@ -113,10 +113,6 @@
                         <div class="form-group">
                             <label for="co_driver">Co Driver :</label>
                             <input type="text" class="form-control" id="co_driver" name="co_driver">
-                        </div>
-                        <div class="form-group">
-                            <label for="no_polisi">Nomor Polisi Bus :</label>
-                            <input type="text" class="form-control" id="no_polisi" name="no_polisi">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -169,7 +165,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            let nama_pemesan = $('#pemesanbus_id');
+            let nama_pemesan = $('#pemesan_id');
 
             nama_pemesan.on('change', function () {
                 let id = $(this).val();

@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PemesanBus\StorePemesanBusRequest;
+use App\Http\Requests\PemesanBus\UpdatePemesanBusRequest;
 use App\Models\PemesanBus;
+use App\Services\PemesanBus\PemesanBusService;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PemesanBusController extends Controller
 {
+    protected $pemesanBusService;
+
+    public function __construct(PemesanBusService $pemesanBusService)
+    {
+        $this->pemesanBusService = $pemesanBusService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = PemesanBus::all();
+        $data = $this->pemesanBusService->all();
+
         return view('pemesanbus.index', compact('data'));
     }
 
@@ -28,21 +41,12 @@ class PemesanBusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePemesanBusRequest $request)
     {
-        $data = $request->validate([
-            'nama_pemesan' => 'required',
-            'no_telp' => 'required',
-            'tanggal_berangkat' => 'required|date',
-            'tanggal_pulang' => 'nullable|date',
-            'biaya_sewa' => 'required|numeric',
-            'tujuan' => 'required',
-            'alamat_jemput' => '',
-            'standby' => '',
-        ]);
-        PemesanBus::create($data);
+            $data = $request->validated();
+            $this->pemesanBusService->create($data);
 
-        return back();
+            return back()->with('Success', 'Pemesan Bus berhasil ditambahkan!');
     }
 
     /**
@@ -50,7 +54,7 @@ class PemesanBusController extends Controller
      */
     public function show($id)
     {
-        $pemesanBus = PemesanBus::findOrFail($id);
+        $pemesanBus = $this->pemesanBusService->findOrFail($id);
 
         return view('pemesanbus.show', compact('pemesanBus'));
     }
@@ -66,22 +70,12 @@ class PemesanBusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePemesanBusRequest $request, $id): \Illuminate\Http\RedirectResponse
     {
-        $data = $request->validate([
-            'nama_pemesan' => 'required',
-            'no_telp' => 'required',
-            'tanggal_berangkat' => 'required|date',
-            'tanggal_pulang' => 'nullable|date',
-            'biaya_sewa' => 'required|numeric',
-            'tujuan' => 'required',
-            'alamat_jemput' => '',
-            'standby' => '',
-        ]);
-        $pemesan = PemesanBus::findOrFail($id);
-        $pemesan->update($data);
+        $data = $request->validated();
+        $this->pemesanBusService->update($id, $data);
 
-        return back();
+        return back()->with('Success', 'Pemesan Bus berhasil diupdate!');
     }
 
     /**
@@ -89,9 +83,13 @@ class PemesanBusController extends Controller
      */
     public function destroy($id)
     {
-        $pemesan = PemesanBus::findOrFail($id);
-        $pemesan->delete();
-        return back();
+        try {
+            $this->pemesanBusService->delete($id);
+
+            return back()->with('Success', 'Pemesan Bus Berhasil di Hapus!');
+        } catch (Exception $e) {
+            return back()->with('Error', 'Pemesan Bus Gagal di Hapus!');
+        }
     }
 
     /**
@@ -100,7 +98,7 @@ class PemesanBusController extends Controller
      */
     public function getPemesanById($id): JsonResponse
     {
-        $pemesanById = PemesanBus::findOrFail($id);
+        $pemesanById = $this->pemesanBusService->findOrFail($id);
         return response()->json($pemesanById);
     }
 }

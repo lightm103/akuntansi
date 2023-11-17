@@ -2,6 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\PemesanBus;
+use App\Models\Project;
+use App\Models\SuratPerintahJalan;
+use App\Models\Transaksi;
+use App\Models\TransaksiProject;
+use App\Models\TransaksiTravel;
+use App\Observers\PemesanBusObserver;
+use App\Observers\ProjectObserver;
+use App\Observers\SuratPerintahJalanObserver;
+use App\Observers\TransaksiObserver;
+use App\Observers\TransaksiProjectObserver;
+use App\Observers\TransaksiTravelObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,7 +37,12 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        SuratPerintahJalan::observe(SuratPerintahJalanObserver::class);
+        PemesanBus::observe(PemesanBusObserver::class);
+        Transaksi::observe(TransaksiObserver::class);
+        TransaksiTravel::observe(TransaksiTravelObserver::class);
+        Project::observe(ProjectObserver::class);
+        TransaksiProject::observe(TransaksiProjectObserver::class);
     }
 
     /**

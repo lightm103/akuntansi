@@ -36,7 +36,7 @@ Route::post('transaksi/eksport', [\App\Http\Controllers\TransaksiController::cla
 Route::delete('transaksi/{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'destroy'])->name('transaksi.destroy');
 
 // Route Kas
-Route::view('kas', 'transaksi.kas.index')->name('kas.index');
+Route::get('kas', [\App\Http\Controllers\KasTransaksiController::class, 'index'])->name('kas.index');
 
 
 Route::resource('penggunaanbus', PenggunaanBusController::class);
@@ -49,3 +49,4 @@ Route::resource('hutanguang', HutangUangController::class);
 
 Route::get('document-spj/{id}', [SuratPerintahJalanController::class, 'show'])->name('spj.show');
 Route::post('document-spj/store/', [SuratPerintahJalanController::class, 'store'])->name('spj.store');
+Route::put('document-spj/update/{id}', [SuratPerintahJalanController::class, 'update'])->name('spj.update');

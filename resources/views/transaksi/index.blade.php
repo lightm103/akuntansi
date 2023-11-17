@@ -60,11 +60,11 @@
         @foreach ($transactions as $transaction)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $transaction->tanggal }}</td>
-                <td>{{ $transaction->jenis_transaksi }}</td>
-                <td>{{ $transaction->deskripsi }}</td>
-                <td>Rp{{ number_format($transaction->debit, 2, ',', '.') }}</td>
-                <td>Rp{{ number_format($transaction->kredit, 2, ',', '.') }}</td>
+                <td>{{ $transaction->tanggal_transaksi }}</td>
+                <td>{{ $transaction->jenisTransaksi->nama_jenis_transaksi }}</td>
+                <td>{{ $transaction->deskripsi_transaksi }}</td>
+                <td>Rp{{ number_format($transaction->jenisTransaksi->kode_jenis_transaksi == 'debit' ? $transaction->jumlah : 0 , 2, ',', '.') }}</td>
+                <td>Rp{{ number_format($transaction->jenisTransaksi->kode_jenis_transaksi == 'kredit' ? $transaction->jumlah : 0 , 2, ',', '.') }}</td>
                 <td>
                     {{--                    <a href="{{ route('pengeluaran.show', $transaction->id) }}"--}}
                     {{--                       class="btn btn-sm btn-info">Detail</a>--}}
@@ -132,9 +132,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="tanggal">Tanggal</label>
+                        <label for="tanggal_transaksi">Tanggal</label>
                         <input type="date"
-                               class="form-control" name="tanggal" id="tanggal" aria-describedby="helpId" placeholder=""
+                               class="form-control" name="tanggal_transaksi" id="tanggal_transaksi" aria-describedby="helpId" placeholder=""
                                required>
                     </div>
                     <div class="form-group">
@@ -147,28 +147,28 @@
                         </select>
                     </div>
                     <div class="form-group d-none" id="project-input">
-                        <label for="deskripsi">Proyek</label>
-                        <select class="form-control" name="deskripsi" id="deskripsi">
+                        <label for="transaksi_project_id">Proyek</label>
+                        <select class="form-control" name="transaksi_project_id" id="transaksi_project_id">
                             @foreach ($projects as $project)
-                                <option value="{{ $project->name }}">{{ $project->name }}</option>
+                                <option value="{{ $project->id }}">{{ $project->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group d-none" id="travel-input">
-                        <label for="deskripsi">Pemesan Bus</label>
-                        <select class="form-control" name="deskripsi" id="deskripsi">
+                        <label for="transaksi_travel_id">Pemesan Bus</label>
+                        <select class="form-control" name="transaksi_travel_id" id="transaksi_travel_id">
                             @foreach ($travels as $travel)
-                                <option value="{{ $travel->nama_pemesan }}">{{ $travel->nama_pemesan }}</option>
+                                <option value="{{ $travel->id }}">{{ $travel->nama_pemesan }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group d-none" id="etc-input">
                         <label>Keterangan</label>
-                        <textarea class="form-control" name="deskripsi" rows="3"></textarea>
+                        <textarea class="form-control" name="deskripsi_transaksi" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="number" class="form-control" name="kredit" required>
+                        <input type="number" class="form-control" name="jumlah" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -196,9 +196,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="tanggal">Tanggal</label>
+                        <label for="tanggal_transaksi">Tanggal</label>
                         <input type="date"
-                               class="form-control" name="tanggal" id="tanggal" aria-describedby="helpId" placeholder=""
+                               class="form-control" name="tanggal_transaksi" id="tanggal_transaksi" aria-describedby="helpId" placeholder=""
                                required>
                     </div>
                     <div class="form-group">
@@ -211,28 +211,28 @@
                         </select>
                     </div>
                     <div class="form-group d-none" id="project-pemasukan">
-                        <label for="deskripsi">Proyek</label>
-                        <select class="form-control" name="deskripsi" id="deskripsi">
+                        <label for="transaksi_project_id">Proyek</label>
+                        <select class="form-control" name="transaksi_project_id" id="transaksi_project_id">
                             @foreach ($projects as $project)
-                                <option value="{{ $project->name }}">{{ $project->name }}</option>
+                                <option value="{{ $project->id }}">{{ $project->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group d-none" id="travel-pemasukan">
-                        <label for="deskripsi">Pemesan Bus</label>
-                        <select class="form-control" name="deskripsi" id="deskripsi">
+                        <label for="transaksi_travel_id">Pemesan Bus</label>
+                        <select class="form-control" name="transaksi_travel_id" id="transaksi_travel_id">
                             @foreach ($travels as $travel)
-                                <option value="{{ $travel->nama_pemesan }}">{{ $travel->nama_pemesan }}</option>
+                                <option value="{{ $travel->id }}">{{ $travel->nama_pemesan }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group d-none" id="etc-pemasukan">
                         <label>Keterangan</label>
-                        <textarea class="form-control" name="deskripsi" rows="3"></textarea>
+                        <textarea class="form-control" name="deskripsi_transaksi" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="number" class="form-control" name="debit" required>
+                        <input type="number" class="form-control" name="jumlah" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -301,15 +301,15 @@
                 projectInput.find('select').prop('disabled', false);
                 travelInput.addClass('d-none');
                 travelInput.find('select').prop('disabled', true);
-                etcInput.addClass('d-none');
-                etcInput.find('textarea').prop('disabled', true);
+                etcInput.removeClass('d-none');
+                etcInput.find('textarea').prop('disabled', false);
             } else if (jenisPengeluaran === 'bus') {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
                 travelInput.removeClass('d-none');
                 travelInput.find('select').prop('disabled', false);
-                etcInput.addClass('d-none');
-                etcInput.find('textarea').prop('disabled', true);
+                etcInput.removeClass('d-none');
+                etcInput.find('textarea').prop('disabled', false);
             } else {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
@@ -331,22 +331,19 @@
                 projectInput.find('select').prop('disabled', false);
                 travelInput.addClass('d-none');
                 travelInput.find('select').prop('disabled', true);
-                etcInput.addClass('d-none');
-                etcInput.find('textarea').prop('disabled', true);
+                etcInput.removeClass('d-none');
             } else if (jenisPemasukan === 'bus') {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
                 travelInput.removeClass('d-none');
                 travelInput.find('select').prop('disabled', false);
-                etcInput.addClass('d-none');
-                etcInput.find('textarea').prop('disabled', true);
+                etcInput.removeClass('d-none');
             } else {
                 projectInput.addClass('d-none');
                 projectInput.find('select').prop('disabled', true);
                 travelInput.addClass('d-none');
                 travelInput.find('select').prop('disabled', true);
                 etcInput.removeClass('d-none');
-                etcInput.find('textarea').prop('disabled', false);
             }
         });
 

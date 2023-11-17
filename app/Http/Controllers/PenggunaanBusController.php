@@ -2,20 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePengguaanBusRequest;
+use App\Http\Requests\UpdatePengguaanBusRequest;
 use App\Models\PemesanBus;
 use App\Models\PenggunaanBus;
 use App\Models\Transaksi;
+use App\Services\ArmadaBus\ArmadaBusService;
+use App\Services\PemesanBus\PemesanBusService;
+use App\Services\PenggunaanBus\PenggunaanBusServiceImplement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PenggunaanBusController extends Controller
 {
+    protected $penggunaanBusService;
+    protected $pemesanBusService;
+    protected $armadaBusServices;
+
+    public function __construct(PenggunaanBusServiceImplement $penggunaanBusService, PemesanBusService $pemesanBusService, ArmadaBusService $armadaBusService)
+    {
+        $this->penggunaanBusService = $penggunaanBusService;
+        $this->pemesanBusService = $pemesanBusService;
+        $this->armadaBusServices = $armadaBusService;
+    }
+
     public function index()
     {
-        $dataBuses = PenggunaanBus::all();
-        $pemesanBus = PemesanBus::all();
+        $dataBuses = $this->penggunaanBusService->all();
+        $pemesanBus = $this->pemesanBusService->all();
+        $armadaBus = $this->armadaBusServices->getBusAvailable();
 
-        return view('penggunaanbus.index', compact('dataBuses', 'pemesanBus'));
+        return view('penggunaanbus.index', compact('dataBuses', 'pemesanBus', 'armadaBus'));
     }
 
     public function create()
@@ -23,65 +40,40 @@ class PenggunaanBusController extends Controller
         return view('penggunaanbus.create');
     }
 
-    public function store(Request $request)
+    public function store(StorePengguaanBusRequest $request)
     {
-        $pemesan = PemesanBus::findOrFail($request['pemesanbus_id']);
-        $data = $request->validate([
-            'pemesanbus_id' => 'required',
-            'uang_masuk' => 'required',
-            'driver1' => 'required',
-            'driver2' => 'required',
-            'co_driver' => 'required',
-            'no_polisi' => 'required',
-        ]);
-        $data['pemesanbus_id'] = $pemesan->id;
+        $data = $request->validated();
+        $this->penggunaanBusService->create($data);
 
-        $dataTransaksi = [
-            'tanggal' => Carbon::now(),
-            'jenis_transaksi' => 'bus',
-            'deskripsi' => 'Uang Masuk dari '. $pemesan->nama_pemesan,
-            'debit' => $data['uang_masuk'],
-        ];
-
-        PenggunaanBus::create($data);
-        Transaksi::create($dataTransaksi);
         return redirect()->route('penggunaanbus.index')->with('success', 'Data Bus Berhasil Disimpan');
     }
 
     public function edit($id)
     {
-        $bus = PenggunaanBus::findOrFail($id);
-        return view('penggunaanbus.edit', compact('bus'));
+
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdatePengguaanBusRequest $request, $id)
     {
-        $bus = PenggunaanBus::findOrFail($id);
+        $data = $request->validated();
+        $this->penggunaanBusService->update($id, $data);
 
-        $data = $request->validate([
-//            'pemesanbus_id' => 'required',
-            'driver1' => 'required',
-            'driver2' => 'required',
-            'co_driver' => 'required',
-            'no_polisi' => 'required',
-        ]);
-
-        $bus->update($data);
-
-        return redirect()->route('penggunaanbus.show', $bus->id)->with('success', 'Data Bus Berhasil di Perbarui');
+        return redirect()->back()->with('success', 'Data Bus Berhasil di Perbarui');
     }
 
     public function show($id)
     {
-        $bus = PenggunaanBus::findOrFail($id);
-        $pemesanBus = PemesanBus::all();
-        return view('penggunaanbus.show', compact('bus', 'pemesanBus'));
+        $bus = $this->penggunaanBusService->findOrFail($id);
+        $pemesanBus = $this->pemesanBusService->all();
+        $armadaBus = $this->armadaBusServices->all();
+
+        return view('penggunaanbus.show', compact('bus', 'pemesanBus', 'armadaBus'));
     }
 
     public function destroy($id)
     {
-        $bus = PenggunaanBus::findOrFail($id);
-        $bus->delete();
-        return redirect()->route('penggunaanbus.index')->with('success', 'Data Bus Berhasil di Hapus');
+        $this->penggunaanBusService->delete($id);
+
+        return redirect()->back()->with('success', 'Data Bus Berhasil di Hapus');
     }
 }

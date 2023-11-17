@@ -35,6 +35,7 @@
             <th>Nama Pemesan</th>
             <th>Tanggal Berangkat</th>
             <th>Biaya Sewa</th>
+            <th>DP</th>
             <th>No Telp</th>
             <th>Action</th>
         </tr>
@@ -46,6 +47,7 @@
                 <td>{{ $pemesanBus->nama_pemesan }}</td>
                 <td>{{ $pemesanBus->tanggal_berangkat }}</td>
                 <td>{{ format_rupiah($pemesanBus->biaya_sewa) }}</td>
+                <td>{{ format_rupiah($pemesanBus->biaya_dp) }}</td>
                 <td>{{ $pemesanBus->no_telp }}</td>
                 <td>
                     <a href="{{ route('pemesanbus.show', $pemesanBus) }}" class="btn btn-sm btn-info">More</a>
@@ -88,15 +90,19 @@
                         </div>
                         <div class="form-group">
                             <label for="biaya_sewa">Biaya Sewa:</label>
-                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" required>
+                            <input type="number" class="form-control" id="biaya_sewa" name="biaya_sewa" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="biaya_dp">DP :</label>
+                            <input type="number" class="form-control" id="biaya_dp" name="biaya_dp" value="0" min="0">
                         </div>
                         <div class="form-group">
                             <label for="tujuan">Tujuan :</label>
-                            <input type="text" class="form-control" id="tujuan" name="tujuan">
+                            <input type="text" class="form-control" id="tujuan" name="tujuan" required>
                         </div>
                         <div class="form-group">
                             <label for="no_telp">Nomor Telp :</label>
-                            <input type="text" class="form-control" id="no_telp" name="no_telp">
+                            <input type="text" class="form-control" id="no_telp" name="no_telp" required>
                         </div>
                         <div class="form-group">
                             <label for="alamat_jemput">Alamat Jemput :</label>
@@ -104,9 +110,8 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="standby">Standby :</label>
-                            <input type="text" class="form-control" id="standby" name="standby" placeholder="Pilih Jam">
+                            <input type="text" class="form-control" id="standby" name="standby" required>
                         </div>
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">Tambah Data</button>
