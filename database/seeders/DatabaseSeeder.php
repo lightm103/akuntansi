@@ -66,8 +66,12 @@ class DatabaseSeeder extends Seeder
                 'kode_jenis_transaksi' => 'kredit',
             ],
             [
-                'nama_jenis_transaksi' => 'Uang DP',
+                'nama_jenis_transaksi' => 'DP Travel',
                 'kode_jenis_transaksi' => 'debit',
+            ],
+            [
+                'nama_jenis_transaksi' => 'Operasional Bus',
+                'kode_jenis_transaksi' => 'kredit',
             ]
         ];
 

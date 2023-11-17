@@ -33,7 +33,7 @@ class SuratPerintahJalanObserver
             'pemesan_bus_id' => $pemesanBus->id,
             'tanggal_transaksi' => $suratPerintahJalan->created_at,
             'deskripsi_transaksi' => 'Pengeluaran Travel ' . $pemesanBus->nama_pemesan,
-            'jenis_transaksi_id' => '2',
+            'jenis_transaksi_id' => '8',
             'jumlah' => $suratPerintahJalan->biaya_driver1 + $suratPerintahJalan->biaya_driver2 + $suratPerintahJalan->biaya_codriver + $suratPerintahJalan->biaya_solar + $suratPerintahJalan->biaya_lainnya,
         ];
 
@@ -52,8 +52,12 @@ class SuratPerintahJalanObserver
             'jumlah' => $suratPerintahJalan->biaya_driver1 + $suratPerintahJalan->biaya_driver2 + $suratPerintahJalan->biaya_codriver + $suratPerintahJalan->biaya_solar + $suratPerintahJalan->biaya_lainnya,
         ];
 
-        $pemesanBus->transaksiTravel()->where('jenis_transaksi_id', 2)->update($data);
+        $transaksiTravel = $pemesanBus->transaksiTravel()->where('jenis_transaksi_id', 8)->first();
+        $transaksiTravel->save($data);
 
+        $transaksi = $transaksiTravel->transaksi;
+        $transaksi->jumlah = $transaksiTravel->jumlah;
+        $transaksi->save();
     }
 
     /**

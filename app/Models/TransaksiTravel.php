@@ -19,6 +19,6 @@ class TransaksiTravel extends Model
 
     public function transaksi()
     {
-        return $this->hasMany(Transaksi::class);
+        return $this->hasOne(Transaksi::class);
     }
 }
