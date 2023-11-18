@@ -44,9 +44,9 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item['jenis_transaksi']}}</td>
                     <td>{{ $item['transaksi']}}</td>
-                    <td>{{ $item['pemasukan']}}</td>
-                    <td>{{ $item['pengeluaran']}}</td>
-                    <td>{{ $item['pemasukan'] - $item['pengeluaran']}}</td>
+                    <td>{{ format_rupiah($item['pemasukan']) }}</td>
+                    <td>{{ format_rupiah($item['pengeluaran']) }}</td>
+                    <td>{{ format_rupiah($item['pemasukan'] - $item['pengeluaran']) }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -6,6 +6,7 @@ use App\Services\Transaksi\TransaksiService;
 use App\Services\TransaksiProject\TransaksiProjectService;
 use App\Services\TransaksiTravel\TransaksiTravelService;
 use Illuminate\Http\Request;
+use Matrix\Builder;
 
 class KasTransaksiController extends Controller
 {
@@ -23,33 +24,49 @@ class KasTransaksiController extends Controller
 
     public function index()
     {
-        $transaksiProject = $this->transaksiProjectService->getGroupByProject();
-        $transaksiTravel = $this->transaksiTravelService->getGroupByProject();
-        $dataTravel = $transaksiTravel->map(function ($item){
-            $pemasukanTravel = $item[0]->whereRelation('jenisTransaksi', 'kode_jenis_transaksi', 'debit')->get();
-            $pengeluaranTravel = $item[0]->whereRelation('jenisTransaksi', 'kode_jenis_transaksi', 'kredit')->get();
-            return [
-                'transaksi' => $item[0]->pemesanBus->nama_pemesan,
-                'jenis_transaksi' => 'Travel',
-                'pemasukan' => $pemasukanTravel->sum('jumlah'),
-                'pengeluaran' => $pengeluaranTravel->sum('jumlah'),
-            ];
-        });
+        $transaksiProjects = $this->transaksiProjectService->getGroupByProject();
+        $transaksiTravels = $this->transaksiTravelService->getGroupByProject();
+        $dataTravel = [];
+        $dataProject = [];
+        foreach ($transaksiTravels as $transaksiTravel) {
+            $arrTravel = [];
+            foreach ($transaksiTravel as $value) {
+                $pemasukanTravel = $value->where('pemesan_bus_id', $value->pemesanBus->id)->whereHas('jenisTransaksi', function ($query) {
+                    $query->where('kode_jenis_transaksi', 'debit');
+                })->get();
+                $pengeluaranTravel = $value->where('pemesan_bus_id', $value->pemesanBus->id)->whereHas('jenisTransaksi', function ($query) {
+                    $query->where('kode_jenis_transaksi', 'kredit');
+                })->get();
 
-        $dataProject = $transaksiProject->map(function ($item){
-            $pemasukanProject = $item[0]->whereRelation('jenisTransaksi', 'kode_jenis_transaksi', 'debit')->get();
-            $pengeluaranProject = $item[0]->whereRelation('jenisTransaksi', 'kode_jenis_transaksi', 'kredit')->get();
+                $arrTravel[] = [
+                    'transaksi' => $value->pemesanBus->nama_pemesan,
+                    'jenis_transaksi' => 'Travel',
+                    'pemasukan' => $pemasukanTravel->sum('jumlah'),
+                    'pengeluaran' => $pengeluaranTravel->sum('jumlah'),
+                ];
+            };
+            $dataTravel [] = $arrTravel[0];
+        }
+        foreach ($transaksiProjects as $transaksiProject) {
+            $arrProject = [];
+            foreach ($transaksiProject as $value) {
+                $pemasukanProject = $value->where('projects_id', $value->projects->id)->whereHas('jenisTransaksi', function ($query) {
+                    $query->where('kode_jenis_transaksi', 'debit');
+                })->get();
+                $pengeluaranProject = $value->where('projects_id', $value->projects->id)->whereHas('jenisTransaksi', function ($query) {
+                    $query->where('kode_jenis_transaksi', 'kredit');
+                })->get();
+                $arrProject[] = [
+                    'transaksi' => $value->projects->name,
+                    'jenis_transaksi' => 'Project',
+                    'pemasukan' => $pemasukanProject->sum('jumlah'),
+                    'pengeluaran' => $pengeluaranProject->sum('jumlah'),
+                ];
+            };
+            $dataProject[] = $arrProject[0];
+        }
 
-            return [
-                'transaksi' => $item[0]->projects->name,
-                'jenis_transaksi' => 'Proyek',
-                'pemasukan' => $pemasukanProject->sum('jumlah'),
-                'pengeluaran' => $pengeluaranProject->sum('jumlah'),
-            ];
-        });
-
-        $data = $dataTravel->merge($dataProject);
-        $data->all();
+        $data = array_merge($dataTravel,$dataProject);
 
         return view('transaksi.kas.index', compact('data'));
     }
