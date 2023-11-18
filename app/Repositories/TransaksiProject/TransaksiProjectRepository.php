@@ -6,5 +6,5 @@ use LaravelEasyRepository\Repository;
 
 interface TransaksiProjectRepository extends Repository{
 
-    // Write something awesome :)
+    public function getGroupByProject();
 }

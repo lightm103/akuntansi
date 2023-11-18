@@ -17,4 +17,14 @@ class JenisTransaksi extends Model
     {
         return $this->hasMany(Transaksi::class);
     }
+
+    public function transaksiTravel()
+    {
+        return $this->hasMany(TransaksiTravel::class);
+    }
+
+    public function transaksiProject()
+    {
+        return $this->hasMany(TransaksiProject::class);
+    }
 }

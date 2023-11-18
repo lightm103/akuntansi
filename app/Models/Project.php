@@ -15,6 +15,6 @@ class Project extends Model
 
     public function transaksiProject()
     {
-        return $this->hasMany(Transaksi::class);
+        return $this->hasMany(TransaksiProject::class);
     }
 }

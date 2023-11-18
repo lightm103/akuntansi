@@ -12,8 +12,13 @@ class TransaksiProject extends Model
     protected $table = 'transaksi_project';
     protected $guarded = ['id'];
 
-    public function project()
+    public function projects()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function jenisTransaksi()
+    {
+        return $this->belongsTo(JenisTransaksi::class);
     }
 }

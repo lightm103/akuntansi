@@ -21,4 +21,9 @@ class TransaksiTravel extends Model
     {
         return $this->hasOne(Transaksi::class);
     }
+
+    public function jenisTransaksi()
+    {
+        return $this->belongsTo(JenisTransaksi::class);
+    }
 }
