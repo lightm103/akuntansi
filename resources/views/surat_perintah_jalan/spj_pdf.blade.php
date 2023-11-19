@@ -31,6 +31,7 @@
 <div class="header">
     <img src="./assets/images/logos/logo-header.png" style="width: 350px; height: auto;" alt="">
     <h3 style="margin: 0px;">Kontraktor dan Transportasi</h3>
+    <h4 style="margin: 0px;">Jalan Dr. Ciptomangunkusumo nomor 44 B Ciamis</h4>
     <hr>
     <h3 style="margin-bottom: 0px;">Surat Perintah Jalan</h3>
     <span>Nomor: {{ $spj->nomor_spj }}</span>
