@@ -11,6 +11,19 @@ class PemesanBus extends Model
 
     protected $guarded = ['id'];
 
+    public function totalUangMasuk()
+    {
+        $transaksiTravels = $this->transaksiTravel;
+        $uangMasuk = [];
+        foreach ($transaksiTravels as $transaksiTravel)
+        {
+            $uangMasuk = $transaksiTravel->where('pemesan_bus_id', $transaksiTravel->pemesanBus->id)->whereHas('jenisTransaksi', function ($query) {
+                $query->where('kode_jenis_transaksi', 'debit');
+            })->get();
+        }
+        return $uangMasuk->sum('jumlah');
+    }
+
     public function penggunaanBus()
     {
         return $this->hasOne(PenggunaanBus::class);
