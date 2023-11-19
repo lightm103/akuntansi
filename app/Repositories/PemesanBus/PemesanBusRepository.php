@@ -6,5 +6,5 @@ use LaravelEasyRepository\Repository;
 
 interface PemesanBusRepository extends Repository{
 
-    // Write something awesome :)
+    public function getNotExistsRelation();
 }

@@ -6,5 +6,5 @@ use LaravelEasyRepository\BaseService;
 
 interface PemesanBusService extends BaseService{
 
-    // Write something awesome :)
+    public function getNotExistsRelation();
 }

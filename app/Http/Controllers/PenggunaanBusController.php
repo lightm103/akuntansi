@@ -29,7 +29,7 @@ class PenggunaanBusController extends Controller
     public function index()
     {
         $dataBuses = $this->penggunaanBusService->all();
-        $pemesanBus = $this->pemesanBusService->all();
+        $pemesanBus = $this->pemesanBusService->getNotExistsRelation();
         $armadaBus = $this->armadaBusServices->getBusAvailable();
 
         return view('penggunaanbus.index', compact('dataBuses', 'pemesanBus', 'armadaBus'));
