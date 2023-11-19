@@ -42,12 +42,12 @@
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Uang Masuk:</div>
-        <div class="col-md-8">{{ format_rupiah($bus->pemesanBus->biaya_dp) }}</div>
+        <div class="col-md-8">{{ format_rupiah($bus->pemesanBus->totalUangMasuk()) }}</div>
     </div>
 
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Uang Belum Dibayar:</div>
-        <div class="col-md-8">{{ format_rupiah($bus->pemesanBus->biaya_sewa - $bus->pemesanBus->biaya_dp) }}</div>
+        <div class="col-md-8">{{ format_rupiah($bus->pemesanBus->biaya_sewa - $bus->pemesanBus->totalUangMasuk()) }}</div>
     </div>
     <div class="row mt-3">
         <div class="col-md-4 font-weight-bold">Driver 1:</div>

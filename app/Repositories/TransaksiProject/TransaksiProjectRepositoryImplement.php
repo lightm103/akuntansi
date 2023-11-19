@@ -19,5 +19,8 @@ class TransaksiProjectRepositoryImplement extends Eloquent implements TransaksiP
         $this->model = $model;
     }
 
-    // Write something awesome :)
+    public function getGroupByProject()
+    {
+        return $this->model->get()->groupBy('projects_id');
+    }
 }

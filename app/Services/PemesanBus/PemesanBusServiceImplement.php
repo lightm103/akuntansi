@@ -18,5 +18,8 @@ class PemesanBusServiceImplement extends Service implements PemesanBusService{
       $this->mainRepository = $mainRepository;
     }
 
-    // Define your custom methods :)
+    public function getNotExistsRelation()
+    {
+        return $this->mainRepository->getNotExistsRelation();
+    }
 }

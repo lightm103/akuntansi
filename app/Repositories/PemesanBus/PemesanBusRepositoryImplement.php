@@ -19,5 +19,8 @@ class PemesanBusRepositoryImplement extends Eloquent implements PemesanBusReposi
         $this->model = $model;
     }
 
-    // Write something awesome :)
+    public function getNotExistsRelation()
+    {
+        return $this->model->doesntHave('penggunaanBus')->get();
+    }
 }

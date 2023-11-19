@@ -2,6 +2,7 @@
 
 namespace App\Services\TransaksiTravel;
 
+use Illuminate\Support\Facades\Log;
 use LaravelEasyRepository\Service;
 use App\Repositories\TransaksiTravel\TransaksiTravelRepository;
 
@@ -18,5 +19,13 @@ class TransaksiTravelServiceImplement extends Service implements TransaksiTravel
       $this->mainRepository = $mainRepository;
     }
 
-    // Define your custom methods :)
+    public function getGroupByProject()
+    {
+        try {
+            return $this->mainRepository->getGroupByProject();
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            return null;
+        }
+    }
 }

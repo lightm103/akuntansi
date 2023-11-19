@@ -32,6 +32,7 @@
         <tr>
             <th>No</th>
             <th>Transaksi</th>
+            <th>Nama Transaksi</th>
             <th>Pemasukan</th>
             <th>Pengeluaran</th>
             <th>Saldo</th>
@@ -41,7 +42,11 @@
             @foreach($data as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item }}</td>
+                    <td>{{ $item['jenis_transaksi']}}</td>
+                    <td>{{ $item['transaksi']}}</td>
+                    <td>{{ format_rupiah($item['pemasukan']) }}</td>
+                    <td>{{ format_rupiah($item['pengeluaran']) }}</td>
+                    <td>{{ format_rupiah($item['pemasukan'] - $item['pengeluaran']) }}</td>
                 </tr>
             @endforeach
         </tbody>

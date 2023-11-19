@@ -6,5 +6,5 @@ use LaravelEasyRepository\BaseService;
 
 interface TransaksiProjectService extends BaseService{
 
-    // Write something awesome :)
+    public function getGroupByProject();
 }
