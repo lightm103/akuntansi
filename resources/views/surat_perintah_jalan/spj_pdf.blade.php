@@ -119,7 +119,7 @@
             </tr>
             <tr>
                 <td style="width: 30%">Lain Lain</td>
-                <td>: {{ format_rupiah($spj->biaya_lainny) }}</td>
+                <td>: {{ format_rupiah($spj->biaya_lainnya) }}</td>
             </tr>
             <tr>
                 <td style="width: 30%">Total</td>

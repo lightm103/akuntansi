@@ -6,5 +6,5 @@ use LaravelEasyRepository\BaseService;
 
 interface SuratPerintahJalanService extends BaseService{
 
-    // Write something awesome :)
+    public function findByIdPenggunaBus($id);
 }

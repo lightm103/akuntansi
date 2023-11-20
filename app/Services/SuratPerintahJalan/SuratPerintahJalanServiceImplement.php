@@ -18,5 +18,8 @@ class SuratPerintahJalanServiceImplement extends Service implements SuratPerinta
       $this->mainRepository = $mainRepository;
     }
 
-    // Define your custom methods :)
+    public function findByIdPenggunaBus($id)
+    {
+        return $this->mainRepository->findByIdPenggunaBus($id);
+    }
 }

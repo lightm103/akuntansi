@@ -240,7 +240,7 @@
                             <div class="form-group">
                                 <label for="biaya_lainnya">Lain Lain</label>
                                 <input type="number"
-                                       class="form-control" name="biaya_lainnya" id="biaya_lainnya" placeholder="">
+                                       class="form-control" name="biaya_lainnya" id="biaya_lainnya" value="{{ $bus->suratPerintahJalan->biaya_lainnya }}" placeholder="">
                             </div>
 
                             <div class="modal-footer">

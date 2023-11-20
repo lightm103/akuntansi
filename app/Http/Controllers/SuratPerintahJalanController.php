@@ -37,7 +37,7 @@ class SuratPerintahJalanController extends Controller
     }
     public function show($id)
     {
-        $spj = $this->suratPerintahJalanService->findOrFail($id);
+        $spj = $this->suratPerintahJalanService->findByIdPenggunaBus($id);
 
         // Set Data
         $spj['total'] = $spj['biaya_driver1'] + $spj['biaya_driver2'] + $spj['biaya_codriver']  + $spj['biaya_solar'] + $spj['biaya_lainnya'] ;
@@ -49,6 +49,7 @@ class SuratPerintahJalanController extends Controller
     public function update($id, UpdateSuratPerintahJalanRequest $request)
     {
         $data = $request->validated();
+        dd($data);
 
         $this->suratPerintahJalanService->update($id, $data);
 

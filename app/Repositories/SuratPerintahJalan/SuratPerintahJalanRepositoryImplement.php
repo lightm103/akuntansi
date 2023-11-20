@@ -19,5 +19,8 @@ class SuratPerintahJalanRepositoryImplement extends Eloquent implements SuratPer
         $this->model = $model;
     }
 
-    // Write something awesome :)
+    public function findByIdPenggunaBus($id)
+    {
+      return $this->model->where('penggunaan_bus_id', $id)->first();
+    }
 }
