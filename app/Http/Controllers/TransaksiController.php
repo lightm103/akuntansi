@@ -75,7 +75,7 @@ class TransaksiController extends Controller
 
             $this->transaksiProjectService->create($validated);
         } else {
-            $validated['jenis_transaksi_id'] = 2;
+            $validated['jenis_transaksi_id'] = 6;
             $this->transaksiService->create($validated);
         }
 

@@ -58,6 +58,7 @@ class HutangUangController extends Controller
     public function update(Request $request, $id)
     {
         $hutangUang = HutangUang::where('id', $id)->first();
+
         $data = [
             'status' => $request['status']
         ];

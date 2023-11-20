@@ -14,6 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.js"></script>
 
 </head>
@@ -75,12 +76,12 @@
                     {{--                       data-keterangan="{{ $transaction->keterangan }}">--}}
                     {{--                        Edit--}}
                     {{--                    </a>--}}
-                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete">
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete_{{$transaction->id}}">
                         Delete
                     </button>
 
                     {{-- Modal Delete --}}
-                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    <div class="modal fade" id="modalDelete_{{$transaction->id}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
                          aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <form action="{{ route('transaksi.destroy', $transaction->id) }}" method="POST"
@@ -112,6 +113,14 @@
             </tr>
         @endforeach
         </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="4" style="text-align:right">Total:</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </tfoot>
     </table>
 </div>
 
@@ -289,7 +298,56 @@
 <script>
     $(document).ready(function () {
         let table = $('#table');
-        table.DataTable();
+        // table.DataTable();
+        new DataTable('#table', {
+            footerCallback: function (row, data, start, end, display) {
+                let api = this.api();
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                    if (typeof i === 'string') {
+                        i = i.replace(/\D/g, '');
+                        i = parseInt(i, 10);
+                        i = Math.floor(i / 100);
+                        var isValid = true;
+                        for (var j = 0; j < i.length; j++) {
+                            if (!isNaN(i[j])) {
+                                continue;
+                            } else {
+                                isValid = false;
+                                break;
+                            }
+                        }
+                        if (isValid) {
+                            return parseInt(i);
+                        } else {
+                            return 0;
+                        }
+                    } else {
+                        return typeof i === 'number'? i : 0;
+                    }
+                };
+
+                var column5 = api.column( 4, {page:'current'} ).data().reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+                var column6 = api.column( 5, {page:'current'} ).data().reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+                $( api.column( 4 ).footer() ).html(column5.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'}));
+                $( api.column( 5 ).footer() ).html(column6.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'}));
+            }
+        });
+
+        let rupiah = "Rp2.000.000,00";
+        rupiah = rupiah.replace(/\D/g, ''); // Menghilangkan karakter non-digit
+        rupiah = parseInt(rupiah, 10);
+        rupiah = Math.floor(rupiah / 100);
+        console.log(rupiah); // Output: 2000000
+
+
+
+
         $('#jenis-pengeluaran').on('change', function () {
             let jenisPengeluaran = $(this).val();
             let projectInput = $('#project-input');

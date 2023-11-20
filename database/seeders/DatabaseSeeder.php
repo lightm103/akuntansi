@@ -72,7 +72,11 @@ class DatabaseSeeder extends Seeder
             [
                 'nama_jenis_transaksi' => 'Operasional Bus',
                 'kode_jenis_transaksi' => 'kredit',
-            ]
+            ],
+            [
+                'nama_jenis_transaksi' => 'Utang',
+                'kode_jenis_transaksi' => 'kredit',
+            ],
         ];
 
         foreach ( $jenisTransaksi as $item )

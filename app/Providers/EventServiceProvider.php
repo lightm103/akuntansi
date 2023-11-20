@@ -2,12 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\HutangBarang;
+use App\Models\HutangUang;
 use App\Models\PemesanBus;
 use App\Models\Project;
 use App\Models\SuratPerintahJalan;
 use App\Models\Transaksi;
 use App\Models\TransaksiProject;
 use App\Models\TransaksiTravel;
+use App\Observers\HutangBarangObserver;
+use App\Observers\HutangUangObserver;
 use App\Observers\PemesanBusObserver;
 use App\Observers\ProjectObserver;
 use App\Observers\SuratPerintahJalanObserver;
@@ -43,6 +47,8 @@ class EventServiceProvider extends ServiceProvider
         TransaksiTravel::observe(TransaksiTravelObserver::class);
         Project::observe(ProjectObserver::class);
         TransaksiProject::observe(TransaksiProjectObserver::class);
+        HutangUang::observe(HutangUangObserver::class);
+        HutangBarang::observe(HutangBarangObserver::class);
     }
 
     /**
