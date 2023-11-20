@@ -31,6 +31,22 @@ class TransaksiController extends Controller
     public function index()
     {
         $transactions = $this->transaksiService->all();
+        $totalTransactions = [];
+        foreach ($transactions as $value) {
+            $pemasukanTravel = $value->whereHas('jenisTransaksi', function ($query) {
+                $query->where('kode_jenis_transaksi', 'debit');
+            })->get();
+            $pengeluaranTravel = $value->whereHas('jenisTransaksi', function ($query) {
+                $query->where('kode_jenis_transaksi', 'kredit');
+            })->get();
+
+            $arrTransaction[] = [
+                'pemasukan' => $pemasukanTravel->sum('jumlah'),
+                'pengeluaran' => $pengeluaranTravel->sum('jumlah'),
+            ];
+        };
+        $totalTransactions = $arrTransaction[0];
+
         $projects = Project::all();
         $travels = $this->pemesanBusService->all();
         $month = Transaksi::select('tanggal_transaksi')
@@ -44,7 +60,7 @@ class TransaksiController extends Controller
                 return Carbon::parse($date->tanggal)->format('Y');
             });
 
-        return view('transaksi.index', compact('transactions', 'projects', 'travels', 'month', 'years'));
+        return view('transaksi.index', compact('transactions', 'projects', 'travels', 'month', 'years', 'totalTransactions'));
     }
 
     public function destroy(Transaksi $transaksi)
@@ -55,6 +71,7 @@ class TransaksiController extends Controller
 
     public function pengeluaran(Request $request)
     {
+
         $validated = $request->validate([
             'tanggal_transaksi' => 'required',
             'jenis_transaksi' => 'required',
@@ -63,6 +80,9 @@ class TransaksiController extends Controller
             'deskripsi_transaksi' => 'required',
             'jumlah' => 'required',
         ]);
+
+        // Ubah Format Jumlah dari string ke Integer
+        $validated['jumlah'] = intval(str_replace(",","", $validated['jumlah']));
 
         if ($validated['jenis_transaksi'] == 'bus') {
             $validated['jenis_transaksi_id'] = 2;

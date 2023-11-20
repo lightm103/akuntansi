@@ -42,7 +42,22 @@
             </button>
             <a name="lihat-kas" id="lihat-kas" class="btn btn-primary ml-3" href="{{ route('kas.index') }}" role="button">Lihat Kas</a>
         </div>
-
+    </div>
+    <div class="d-flex my-4">
+        <div>
+            <table>
+                <tr>
+                    <td style="width: 200px;"><h5>Total Pemasukan</h5></td>
+                    <td style="width: 20px;"><h5>:</h5></td>
+                    <td><h5>{{ format_rupiah($totalTransactions['pemasukan']) }}</h5></td>
+                </tr>
+                <tr>
+                    <td style="width: 200px;"><h5>Total Pengeluaran</h5></td>
+                    <td style="width: 20px;"><h5>:</h5></td>
+                    <td><h5> {{ format_rupiah($totalTransactions['pengeluaran']) }} </h5></td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <table class="table table-bordered table-striped" id="table">
@@ -177,7 +192,7 @@
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="number" class="form-control" name="jumlah" required>
+                        <input type="text" class="number form-control" name="jumlah" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -241,7 +256,7 @@
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="number" class="form-control" name="jumlah" required>
+                        <input type="text" class="number form-control" name="jumlah" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -297,6 +312,20 @@
 
 <script>
     $(document).ready(function () {
+        // merubah format number
+        $('input.number').keyup(function(event) {
+            // skip for arrow keys
+            if(event.which >= 37 && event.which <= 40) return;
+            // format number
+            $(this).val(function(index, value) {
+                return value
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                    ;
+            });
+        });
+
+
         let table = $('#table');
         // table.DataTable();
         new DataTable('#table', {
@@ -338,15 +367,6 @@
                 $( api.column( 5 ).footer() ).html(column6.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'}));
             }
         });
-
-        let rupiah = "Rp2.000.000,00";
-        rupiah = rupiah.replace(/\D/g, ''); // Menghilangkan karakter non-digit
-        rupiah = parseInt(rupiah, 10);
-        rupiah = Math.floor(rupiah / 100);
-        console.log(rupiah); // Output: 2000000
-
-
-
 
         $('#jenis-pengeluaran').on('change', function () {
             let jenisPengeluaran = $(this).val();
