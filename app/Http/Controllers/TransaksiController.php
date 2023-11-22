@@ -113,6 +113,9 @@ class TransaksiController extends Controller
             'jumlah' => 'required',
         ]);
 
+        // Ubah Format Jumlah dari string ke Integer
+        $validated['jumlah'] = intval(str_replace(",","", $validated['jumlah']));
+
         if ($validated['jenis_transaksi'] == 'bus') {
             $validated['jenis_transaksi_id'] = 1;
             $validated['pemesan_bus_id'] = $validated['transaksi_travel_id'];
