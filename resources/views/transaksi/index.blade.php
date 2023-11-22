@@ -320,7 +320,7 @@
             $(this).val(function(index, value) {
                 return value
                     .replace(/\D/g, "")
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     ;
             });
         });
