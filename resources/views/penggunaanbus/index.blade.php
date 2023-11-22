@@ -11,7 +11,7 @@
 
 <body>
 <div class="container mt-5">
-    <h3 class="mb-4">Bus Pariwisata</h3>
+    <h3 class="mb-4">Penggunaan Bus</h3>
     <div class="row mb-3">
         <div class="col-md-12">
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">Kembali ke Dashboard</a>

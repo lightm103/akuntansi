@@ -21,7 +21,7 @@
 
 <body>
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Daftar Pengeluaran</h2>
+    <h2 class="text-center mb-4">Daftar Transaksi</h2>
     <div class="row mb-3">
         <div class="col-md-12">
             <a href="{{ route('dashboard') }}" class="btn btn-secondary">Kembali ke Dashboard</a>
