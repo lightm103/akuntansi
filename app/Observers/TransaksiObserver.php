@@ -27,7 +27,16 @@ class TransaksiObserver
      */
     public function deleted(Transaksi $transaksi): void
     {
-        //
+        switch (true) {
+            case!is_null($transaksi->transaksiTravel):
+                $transaksi->transaksiTravel()->delete();
+                break;
+            case!is_null($transaksi->transaksiProject()):
+                $transaksi->transaksiProject()->delete();
+                break;
+            default:
+                break;
+        }
     }
 
     /**

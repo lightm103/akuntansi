@@ -17,6 +17,11 @@ class Transaksi extends Model
         return $this->belongsTo(TransaksiTravel::class);
     }
 
+    public function transaksiProject()
+    {
+        return $this->belongsTo(TransaksiProject::class);
+    }
+
     public function jenisTransaksi()
     {
        return $this->belongsTo(JenisTransaksi::class);
