@@ -23,4 +23,9 @@ class TransaksiTravelRepositoryImplement extends Eloquent implements TransaksiTr
     {
         return $this->model->get()->groupBy('pemesan_bus_id');
     }
+
+    public function getByPemesanId($id)
+    {
+        return $this->model->where('pemesan_bus_id', $id)->get();
+    }
 }

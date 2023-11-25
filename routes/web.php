@@ -37,7 +37,8 @@ Route::delete('transaksi/{transaksi}', [\App\Http\Controllers\TransaksiControlle
 
 // Route Kas
 Route::get('kas', [\App\Http\Controllers\KasTransaksiController::class, 'index'])->name('kas.index');
-
+Route::get('kas/detail-project/{id}', [\App\Http\Controllers\KasTransaksiController::class, 'detailProject'])->name('kas.project.detail');
+Route::get('kas/detail-travel/{id}', [\App\Http\Controllers\KasTransaksiController::class, 'detailTravel'])->name('kas.travel.detail');
 
 Route::resource('penggunaanbus', PenggunaanBusController::class);
 

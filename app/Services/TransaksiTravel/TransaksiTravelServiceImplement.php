@@ -28,4 +28,14 @@ class TransaksiTravelServiceImplement extends Service implements TransaksiTravel
             return null;
         }
     }
+
+    public function getByPemesanId($id)
+    {
+        try {
+            return $this->mainRepository->getByPemesanId($id);
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            return null;
+        }
+    }
 }

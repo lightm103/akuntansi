@@ -28,4 +28,14 @@ class TransaksiProjectServiceImplement extends Service implements TransaksiProje
             return null;
         }
     }
+
+    public function getByProjectId($id)
+    {
+        try {
+            return $this->mainRepository->getByProjectId($id);
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            return null;
+        }
+    }
 }

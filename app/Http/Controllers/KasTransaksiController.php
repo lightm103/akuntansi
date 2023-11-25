@@ -39,6 +39,8 @@ class KasTransaksiController extends Controller
                 })->get();
 
                 $arrTravel[] = [
+                    'transaksi_travel_id' => $value->pemesan_bus_id,
+                    'transaksi_project_id' => null,
                     'transaksi' => $value->pemesanBus->nama_pemesan,
                     'jenis_transaksi' => 'Travel',
                     'pemasukan' => $pemasukanTravel->sum('jumlah'),
@@ -57,6 +59,8 @@ class KasTransaksiController extends Controller
                     $query->where('kode_jenis_transaksi', 'kredit');
                 })->get();
                 $arrProject[] = [
+                    'transaksi_travel_id' => null,
+                    'transaksi_project_id' => $value->projects_id,
                     'transaksi' => $value->projects->name,
                     'jenis_transaksi' => 'Project',
                     'pemasukan' => $pemasukanProject->sum('jumlah'),
@@ -67,7 +71,22 @@ class KasTransaksiController extends Controller
         }
 
         $data = array_merge($dataTravel,$dataProject);
+//        dd($data);
 
         return view('transaksi.kas.index', compact('data'));
+    }
+
+    public function detailProject($id)
+    {
+        $data = $this->transaksiProjectService->getByProjectId($id);
+
+        return view('transaksi.kas.detail.index', compact('data'));
+    }
+
+    public function detailTravel($id)
+    {
+        $data = $this->transaksiTravelService->getByPemesanId($id);
+
+        return view('transaksi.kas.detail.index', compact('data'));
     }
 }

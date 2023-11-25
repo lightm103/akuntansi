@@ -7,4 +7,5 @@ use LaravelEasyRepository\BaseService;
 interface TransaksiTravelService extends BaseService{
 
     public function getGroupByProject();
+    public function getByPemesanId($id);
 }

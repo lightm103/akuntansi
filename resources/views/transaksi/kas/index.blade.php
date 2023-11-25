@@ -36,17 +36,25 @@
             <th>Pemasukan</th>
             <th>Pengeluaran</th>
             <th>Saldo</th>
+            <th>Aksi</th>
         </tr>
         </thead>
         <tbody>
             @foreach($data as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item['jenis_transaksi']}}</td>
+                    <td>{{ $item['jenis_transaksi'] }}</td>
                     <td>{{ $item['transaksi']}}</td>
                     <td>{{ format_rupiah($item['pemasukan']) }}</td>
                     <td>{{ format_rupiah($item['pengeluaran']) }}</td>
                     <td>{{ format_rupiah($item['pemasukan'] - $item['pengeluaran']) }}</td>
+                    <td>
+                        @if($item['transaksi_travel_id'] == null)
+                             <a href="{{ route('kas.project.detail', $item['transaksi_project_id']) }}" class="btn btn-primary">Detail</a>
+                        @elseif($item['transaksi_project_id'] == null)
+                             <a href="{{ route('kas.travel.detail', $item['transaksi_travel_id']) }}" class="btn btn-primary">Detail</a>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>

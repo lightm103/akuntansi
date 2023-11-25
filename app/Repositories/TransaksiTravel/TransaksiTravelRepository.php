@@ -7,4 +7,5 @@ use LaravelEasyRepository\Repository;
 interface TransaksiTravelRepository extends Repository{
 
     public function getGroupByProject();
+    public function getByPemesanId($id);
 }

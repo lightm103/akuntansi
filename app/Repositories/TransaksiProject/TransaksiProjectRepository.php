@@ -7,4 +7,5 @@ use LaravelEasyRepository\Repository;
 interface TransaksiProjectRepository extends Repository{
 
     public function getGroupByProject();
+    public function getByProjectId($id);
 }
