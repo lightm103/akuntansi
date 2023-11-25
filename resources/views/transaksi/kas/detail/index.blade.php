@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Transaksi</title>
+    <title>Detail Transaksi</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 
 <body>
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Daftar Transaksi</h2>
+    <h2 class="text-center mb-4">Detail Kas</h2>
     <div class="row mb-3">
         <div class="col-md-12">
             <a href="{{ route('kas.index') }}" class="btn btn-secondary">Kembali ke Kas</a>
