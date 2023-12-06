@@ -43,10 +43,13 @@ class PemesanBusController extends Controller
      */
     public function store(StorePemesanBusRequest $request)
     {
-            $data = $request->validated();
-            $this->pemesanBusService->create($data);
+        $data = $request->validated();
+        // Ubah Format Jumlah dari string ke Integer
+        $data['biaya_sewa'] = intval(str_replace(",", "", $data['biaya_sewa']));
+        $data['biaya_dp'] = intval(str_replace(",", "", $data['biaya_dp']));
+        $this->pemesanBusService->create($data);
 
-            return back()->with('Success', 'Pemesan Bus berhasil ditambahkan!');
+        return back()->with('Success', 'Pemesan Bus berhasil ditambahkan!');
     }
 
     /**
