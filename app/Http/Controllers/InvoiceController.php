@@ -98,7 +98,7 @@ class InvoiceController extends Controller
 
         $pdf = PDF::loadView('invoices.pdf', compact('invoice'));
 
-        return $pdf->stream('invoice.pdf');
+        return $pdf->download('invoice.pdf');
     }
 
     public function destroy($id)
