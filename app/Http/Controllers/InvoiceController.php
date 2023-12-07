@@ -96,7 +96,6 @@ class InvoiceController extends Controller
         }
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('invoices.pdf', compact('invoice')); // Membuat instance PDF
-        dd($pdf);
         return $pdf->download('invoice.pdf'); // Menggunakan instance PDF untuk meng-generate PDF
     }
 
