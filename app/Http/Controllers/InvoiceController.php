@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
