@@ -33,7 +33,7 @@ Route::get('transaksi', [\App\Http\Controllers\TransaksiController::class, 'inde
 Route::post('transaksi/debit', [\App\Http\Controllers\TransaksiController::class, 'pemasukan'])->name('transaksi.debit');
 Route::post('transaksi/kredit', [\App\Http\Controllers\TransaksiController::class, 'pengeluaran'])->name('transaksi.kredit');
 Route::resource('pengeluaran', PengeluaranController::class);
-Route::post('transaksi/eksport', [\App\Http\Controllers\TransaksiController::class, 'exportByMonth'])->name('transaksi.eksport');
+Route::match(['get', 'post'], 'transaksi/eksport', [\App\Http\Controllers\TransaksiController::class, 'exportByMonth'])->name('transaksi.eksport');
 Route::delete('transaksi/{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'destroy'])->name('transaksi.destroy');
 
 // Route Kas
