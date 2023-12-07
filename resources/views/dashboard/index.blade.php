@@ -84,14 +84,6 @@
             <div class="col-6 mb-3">
                 <div class="card h-100 shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Penggunaan Bus</h5>
-                        <a href="/penggunaanbus" class="btn btn-primary btn-block">Lihat Data</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 mb-3">
-                <div class="card h-100 shadow">
-                    <div class="card-body">
                         <h5 class="card-title">Hutang Barang</h5>
                         <a href="{{ route('hutang.index')}}" class="btn btn-primary btn-block">Lihat Data</a>
                     </div>
@@ -109,7 +101,7 @@
                 <div class="card h-100 shadow">
                     <div class="card-body">
                         <h5 class="card-title">INVOICE</h5>
-                        <a href="https://docs.google.com/document/d/182t0xCbVSI6PxaOOExplX2fry8CRc79jFHUEyPVk3-0/edit?usp=sharing" class="btn btn-primary btn-block">Lihat Data</a>
+                        <a href="{{ route('invoice.index')}}" class="btn btn-primary btn-block">Buat Invoice</a>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HutangUangController;
 use App\Http\Controllers\PemesanBusController;
 use App\Http\Controllers\HutangBarangController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PenggunaanBusController;
 use App\Http\Controllers\SuratPerintahJalanController;
 use App\Http\Controllers\PengeluaranController; // Jangan lupa untuk meng-import PengeluaranController
@@ -51,3 +52,5 @@ Route::resource('hutanguang', HutangUangController::class);
 Route::get('document-spj/{id}', [SuratPerintahJalanController::class, 'show'])->name('spj.show');
 Route::post('document-spj/store/', [SuratPerintahJalanController::class, 'store'])->name('spj.store');
 Route::put('document-spj/update/{id}', [SuratPerintahJalanController::class, 'update'])->name('spj.update');
+Route::resource('invoice', InvoiceController::class);
+Route::get('invoice/pdf/{id}', [InvoiceController::class, 'downloadPDF'])->name('invoice.pdf');
