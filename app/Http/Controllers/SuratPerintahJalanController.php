@@ -49,7 +49,6 @@ class SuratPerintahJalanController extends Controller
     public function update($id, UpdateSuratPerintahJalanRequest $request)
     {
         $data = $request->validated();
-        dd($data);
 
         $this->suratPerintahJalanService->update($id, $data);
 
