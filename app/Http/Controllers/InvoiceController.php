@@ -95,7 +95,7 @@ class InvoiceController extends Controller
             return redirect()->route('invoice.index')->with('error', 'Invoice tidak ditemukan.');
         }
 
-        $pdf = \Barryvdh\DomPDF\PDF::loadView('invoices.pdf', compact('invoice')); // Membuat instance PDF
+        $pdf = \Barryvdh\DomPDF\Facade\PDF::loadView('invoices.pdf', compact('invoice')); // Membuat instance PDF
         dd($pdf);
         return $pdf->download('invoice.pdf'); // Menggunakan instance PDF untuk meng-generate PDF
     }
