@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\Style;
 
 class TransaksiExport implements FromCollection, WithHeadings
 {
@@ -34,8 +35,8 @@ class TransaksiExport implements FromCollection, WithHeadings
                 'tanggal' => $item->tanggal_transaksi,
                 'jenis_transaksi' => $item->jenisTransaksi->nama_jenis_transaksi,
                 'deskripsi' => $item->deskripsi_transaksi,
-                'debit' => number_format($item->jenisTransaksi->kode_jenis_transaksi == 'debit' ? $item->jumlah : 0 , 2, ',', '.'),
-                'kredit' => number_format($item->jenisTransaksi->kode_jenis_transaksi == 'kredit' ? $item->jumlah : 0 , 2, ',', '.'),
+                'debit' => 'Rp ' . number_format($item->jenisTransaksi->kode_jenis_transaksi == 'debit' ? $item->jumlah : 0, 0, ',', '.') . ',00',
+                'kredit' => 'Rp ' . number_format($item->jenisTransaksi->kode_jenis_transaksi == 'kredit' ? $item->jumlah : 0, 0, ',', '.') . ',00',
             ];
 
             return $data;
@@ -45,6 +46,20 @@ class TransaksiExport implements FromCollection, WithHeadings
 
         return $transactions;
     }
+
+    public function styles($excel)
+    {
+        return [
+            1 => ['font' => ['size' => 10], 'borders' => ['outline' => ['style' => 'thin']]],
+            2 => ['font' => ['size' => 40], 'borders' => ['outline' => ['style' => 'thin']]],
+            3 => ['font' => ['size' => 50], 'borders' => ['outline' => ['style' => 'thin']]],
+            4 => ['font' => ['size' => 50], 'borders' => ['outline' => ['style' => 'thin']]],
+            5 => ['font' => ['size' => 70], 'borders' => ['outline' => ['style' => 'thin']]],
+            6 => ['font' => ['size' => 70], 'borders' => ['outline' => ['style' => 'thin']]],
+        ];
+    }
+
+
 
     public function headings(): array
     {

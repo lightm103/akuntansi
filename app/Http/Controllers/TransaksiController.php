@@ -138,7 +138,7 @@ class TransaksiController extends Controller
     {
         $month = $request->month;
         $year = $request->year;
-        $fileName = 'Report_' . $month . '_' . $year . '.xlsx';
+        $fileName = 'Report_' . $month . '_' . $year . '.pdf';
 
         return (new TransaksiExport($month, $year))->download($fileName);
     }
