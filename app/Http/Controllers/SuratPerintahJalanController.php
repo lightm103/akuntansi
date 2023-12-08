@@ -53,5 +53,6 @@ class SuratPerintahJalanController extends Controller
         $this->suratPerintahJalanService->update($id, $data);
 
         return redirect()->back()->with('Success', 'Surat Perintah Jalan Berhasil di Update');
+        dd($data);
     }
 }

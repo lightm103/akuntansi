@@ -52,12 +52,12 @@ class TransaksiController extends Controller
         $month = Transaksi::select('tanggal_transaksi')
             ->get()
             ->groupBy(function ($date) {
-                return Carbon::parse($date->tanggal)->format('m');
+                return $date->tanggal;
             });
         $years = Transaksi::select('tanggal_transaksi')
             ->get()
             ->groupBy(function ($date) {
-                return Carbon::parse($date->tanggal)->format('Y');
+                return $date->tanggal;
             });
 
         return view('transaksi.index', compact('transactions', 'projects', 'travels', 'month', 'years', 'totalTransactions'));

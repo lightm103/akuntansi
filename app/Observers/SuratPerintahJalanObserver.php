@@ -58,6 +58,15 @@ class SuratPerintahJalanObserver
         $transaksi = $transaksiTravel->transaksi;
         $transaksi->jumlah = $transaksiTravel->jumlah;
         $transaksi->save();
+        $transaksiTravel = $pemesanBus->transaksiTravel()->where('jenis_transaksi_id', 8)->first();
+        if ($transaksiTravel) {
+            $transaksiTravel->update($data); // Menggunakan method update() yang lebih sesuai
+    
+            $transaksi = $transaksiTravel->transaksi;
+            if ($transaksi) {
+                $transaksi->update(['jumlah' => $transaksiTravel->jumlah]); // Update jumlah pada Transaksi
+            }
+        }
     }
 
     /**
