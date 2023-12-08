@@ -65,19 +65,27 @@
                     </div>
                 </div>
             </div>
+            <div class="col-6 mb-3">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Pemesanan Bus</h5>
+                        <a href="{{ route('pemesanbus.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
+                    </div>
+                </div>
+            </div>
             <div class="col-6 mb-3 ">
                 <div class="card h-100 shadow">
                     <div class="card-body">
                         <h5 class="card-title">Pengeluaran & Pemasukan</h5>
-                        <a href="{{ route('transaksi.index') }}" class="btn btn-primary btn-block">Lihat Detail</a>
+                        <a href="https://akuntansi.samagahadigital.com/transaksi" class="btn btn-primary btn-block">Lihat Detail</a>
                     </div>
                 </div>
             </div>
             <div class="col-6 mb-3">
                 <div class="card h-100 shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Pemesanan Bus</h5>
-                        <a href="{{ route('pemesanbus.index') }}" class="btn btn-primary btn-block">Lihat Data</a>
+                        <h5 class="card-title">INVOICE</h5>
+                        <a href="{{ route('invoice.index')}}" class="btn btn-primary btn-block">Buat Invoice</a>
                     </div>
                 </div>
             </div>
@@ -97,14 +105,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 mb-3">
+            <div class="col-12 mb-3">
                 <div class="card h-100 shadow">
                     <div class="card-body">
-                        <h5 class="card-title">INVOICE</h5>
-                        <a href="{{ route('invoice.index')}}" class="btn btn-primary btn-block">Buat Invoice</a>
+                        <h5 class="card-title">.</h5>
+                        <button class="btn btn-warning btn-block" disabled></button>
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>        
     </div>
 
