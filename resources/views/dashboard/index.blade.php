@@ -77,7 +77,7 @@
                 <div class="card h-100 shadow">
                     <div class="card-body">
                         <h5 class="card-title">Pengeluaran & Pemasukan</h5>
-                        <a href="https://akuntansi.samagahadigital.com/transaksi" class="btn btn-primary btn-block">Lihat Detail</a>
+                        <a href="https://akuntansi.samagahadigital.com/transaksi" target="blank" class="btn btn-primary btn-block">Lihat Detail</a>
                     </div>
                 </div>
             </div>
